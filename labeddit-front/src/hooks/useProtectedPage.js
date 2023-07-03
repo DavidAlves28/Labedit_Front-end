@@ -10,7 +10,7 @@ const useProtectedPage = () => {
 
     if (!token) {
       // Se não houver token, o navigate vai redirecionar para a página de login
-      navigate('/loginPage');
+      navigate('/');
     }
   }, [navigate]);
 };

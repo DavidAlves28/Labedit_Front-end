@@ -1,12 +1,26 @@
-
 import React from "react";
-import HeaderHome from "../components/Header/header";
+import FormSignup from "../components/forms/FormSignup";
+
+import { Stack, Text } from "@chakra-ui/react";
+import Header from "../components/Headers/header";
+
 
 export default function SignupPage() {
+  
   return (
-    <React.Fragment>
-      <HeaderHome />
-      MInha home PAge
-    </React.Fragment>
+    <Stack maxW={"1280px"} m="0 auto">
+      <Header/>
+      <Stack  ml='33px' justify={"center"} align={"center"}>
+        <Text
+          align={"left"}
+          fontSize={"33px"}
+          color="#373737"
+          fontWeight={"bold"}
+        >
+          Olá, boas vindas ao LabEddit ;)
+        </Text>
+      </Stack>
+      <FormSignup />
+    </Stack>
   );
 }

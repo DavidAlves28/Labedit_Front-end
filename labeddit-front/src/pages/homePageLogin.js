@@ -1,7 +1,7 @@
 import { Stack } from "@chakra-ui/react";
-import HeaderHome from "../components/Header/header";
+import FormLogin from "../components/forms/FormLogin";
+import HeaderHome from "../components/Headers/headerLogin";
 
-import FormLogin from "../components/formLogin/FormLogin";
 
 export default function HomePageLogin() {
   return (
