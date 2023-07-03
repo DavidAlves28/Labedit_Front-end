@@ -4,10 +4,13 @@ import { useNavigate } from "react-router-dom";
 import { goToContent, goToSignup } from "../../router/coodinator";
 import ButtonCommon from "../utils/ButtonCommon";
 import LineDivider from "../utils/LineDivider";
+import { loginAPI } from "../../apis/login";
+import { useState } from "react";
+import Loading from "../utils/Loading";
 
 export default function FormLogin() {
   const navigate = useNavigate();
-
+  const [isLoading, setIsLoading] = useState(false)
   const { form, onChangeForm, cleanFields } = useForm({
     email: "",
     password: "",
@@ -15,10 +18,14 @@ export default function FormLogin() {
 
   const login = (event) => {
     event.preventDefault();
+    loginAPI(form, navigate);
+    setIsLoading(true)
     cleanFields();
-    goToContent(navigate);
   };
 
+//   if (isLoading) {
+//     return <Loading/>;
+// }
   return (
     <section>
       <Flex flexDir={"column"} px={{ base: "33px", md: "300px" }} mt={"50px"}>
@@ -44,8 +51,8 @@ export default function FormLogin() {
             placeholder="Senha"
             required
           />
-
-          <ButtonCommon content={"Continuar"} />
+             
+          <ButtonCommon isLoading={isLoading} type={"submit"} funcao={login} content={"Continuar"} />
         </form>
         <LineDivider />
         <Button

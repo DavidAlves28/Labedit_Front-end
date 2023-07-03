@@ -1,30 +1,34 @@
-import { Button, Flex, Input } from "@chakra-ui/react";
+import { Checkbox, Flex, Input, Stack, Text } from "@chakra-ui/react";
 import useForm from "../../hooks/useForm";
 import { useNavigate } from "react-router-dom";
-import { goToContent, goToSignup } from "../../router/coodinator";
+import { goToContent } from "../../router/coodinator";
 import ButtonCommon from "../utils/ButtonCommon";
-import LineDivider from "../utils/LineDivider";
+import { useEffect, useState } from "react";
+import { singup } from "../../apis/signup";
 
 export default function FormSignup() {
   const navigate = useNavigate();
 
   const { form, onChangeForm, cleanFields } = useForm({
-    name:"",
+    name: "",
     email: "",
     password: "",
   });
-
+  // console.log(form);
   const login = (event) => {
     event.preventDefault();
     cleanFields();
     goToContent(navigate);
+    singup(form)
   };
-
+ 
+ 
+  const [checkbox, setCheckbox] = useState(false);
   return (
     <section>
-      <Flex flexDir={"column"} px={{ base: "33px", md: "300px" }} mt={"50px"}>
+      <Flex flexDir={"column"} px={{ base: "33px", md: "300px" }} mt={"70px"}>
         <form onSubmit={login}>
-        <Input
+          <Input
             mb="12px"
             h="60px"
             id="name"
@@ -57,22 +61,35 @@ export default function FormSignup() {
             required
           />
 
-          <ButtonCommon content={"Continuar"} />
+          <Stack
+            mt="40px"
+            spacing={0}
+            textAlign={"justify"}
+            justify={"left"}
+            align={"start"}
+            fontSize={"14px"}
+            gap={"12px"}
+          >
+            <Text>
+              Ao continuar, você concorda com o nosso Contrato de usuário e
+              nossa Política de Privacidade
+            </Text>
+            <Checkbox
+              fontWeight={"semibold"}
+              isRequired
+              value={checkbox}
+              onChange={(e) => setCheckbox(e.target.checked)}
+            >
+              Eu concordo em receber emails sobre coisas legais no Labeddit
+            </Checkbox>
+          </Stack>
         </form>
-        <LineDivider />
-        <Button
-          h="51px"
-          rounded={"27px"}
-          colorScheme="blue"
-          type="button"
-          borderColor={"#FE7E02"}
-          variant={"outline"}
-          onClick={() => goToSignup(navigate)}
-          textColor={"#FE7E02"}
-          fontSize={"18px"}
-        >
-          Crie uma conta!
-        </Button>
+
+        {checkbox ? (
+          <ButtonCommon type={"submit"} funcao={login} content={"Cadastrar"} />
+        ) : (
+          <ButtonCommon content={"Cadastrar"} />
+        )}
       </Flex>
     </section>
   );

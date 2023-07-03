@@ -1,9 +1,13 @@
-import { Box, Img, Stack } from "@chakra-ui/react";
+import { Box, Button, Img, Stack } from "@chakra-ui/react";
 import logolabe from "../../assets/images/logolabeddit.svg";
 import { Link } from "react-router-dom";
-export default function HeaderSignup() {
+export default function Header() {
+  const isToken = localStorage.getItem('token') 
+  const logout = ()=>{
+  
+  }
   return (
-    <Box w={{base:'100vw',md:'720px'}} m='0 auto'>
+    <Box w={{base:'100vw',md:'720px'}}  m='0 auto'>
       <Stack rounded={'md'} bgColor="#EDEDED"  m='0 auto' mt="40px">
         <Stack
           w={"100%"}
@@ -20,7 +24,8 @@ export default function HeaderSignup() {
             fontSize={"18px"}
             color={"#4088CB"}
           >
-            <Link to="/">Entrar</Link>
+           {!!isToken ?<Button  color={"#4088CB"} >Logout</Button>  : <Link to="/">Entrar</Link> }
+            
           </Stack>
         </Stack>
       </Stack>
