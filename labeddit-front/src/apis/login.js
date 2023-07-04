@@ -1,24 +1,22 @@
-import axios from "axios"
-import { BASE_URL } from "../constants/BASE_URL.js"
-import { goToContent } from "../router/coodinator.js";
+import axios from "axios";
+import { BASE_URL } from "../constants/BASE_URL.js";
+import { goToContent, goToLogin } from "../router/coodinator.js";
+import { useLocation } from "react-router-dom";
 
+// função de login 
 
-
-
-// const token =  localStorage.getItem('token') 
-const url = `${BASE_URL}/users/login`
-
-
-
-export const loginAPI =async (body,navigate)=>{
-    
-    try {
-        const response = await axios.post(url,body)    
-        const token = response.data.token    
-        localStorage.setItem('token',token)
-        goToContent(navigate)
-                } catch(error) {
-                console.log(error.response)
-            }
-}
-
+export const loginAPI = async (body, navigate,setIsError,setIsLoading) => {
+  try {
+    const response = await axios.post(`${BASE_URL}/users/login`, body);
+    const token = response.data.token;
+    // setar token no localstorage
+    localStorage.setItem("token", token);
+    // redirecionar para pagina de publicações!
+    goToContent(navigate);
+  } catch (error) {
+    setIsError(true)
+    setIsLoading(false)
+    goToLogin(navigate)    
+    setIsError(false)
+  }
+};
