@@ -1,31 +1,38 @@
 import { Button, Flex, Input } from "@chakra-ui/react";
-import useForm from "../../hooks/useForm";
-import { useNavigate } from "react-router-dom";
 import { goToContent, goToSignup } from "../../router/coodinator";
 import ButtonCommon from "../utils/ButtonCommon";
 import LineDivider from "../utils/LineDivider";
+import { useContext, useState } from "react";
+import { GlobalContext } from "../../globalContext/globalContext";
+import { useNavigate } from "react-router-dom";
 import { loginAPI } from "../../apis/login";
-import { useState } from "react";
-import Loading from "../utils/Loading";
+import useForm from "../../hooks/useForm";
 
 export default function FormLogin() {
+  // GlobalState
+  // const context = useContext(GlobalContext);
   const navigate = useNavigate();
-  const [isLoading, setIsLoading] = useState(false)
-  const { form, onChangeForm, cleanFields } = useForm({
-    email: "",
-    password: "",
-  });
-
-  const login = (event) => {
-    event.preventDefault();
-    loginAPI(form, navigate);
-    setIsLoading(true)
-    cleanFields();
-  };
-
-//   if (isLoading) {
-//     return <Loading/>;
-// }
+  // context utilizado.
+  // const {formLogin,onChangeFormLogin,login, isLoading, setIsLoading } = context;
+  const [isLoading, setIsLoading] = useState(false)   
+  const [isError, setIsError] = useState(false)   
+    // form de login      
+    const { form, onChangeForm, cleanFields } = useForm({
+      email: "",
+      password: "",
+    });
+  
+    // button login da página login 
+  
+    const login = (event) => {
+      event.preventDefault();
+      loginAPI(form,navigate,setIsError,setIsLoading);
+      setIsLoading(true);
+      cleanFields();
+    };
+    
+          
+  
   return (
     <section>
       <Flex flexDir={"column"} px={{ base: "33px", md: "300px" }} mt={"50px"}>
@@ -51,8 +58,13 @@ export default function FormLogin() {
             placeholder="Senha"
             required
           />
-             
-          <ButtonCommon isLoading={isLoading} type={"submit"} funcao={login} content={"Continuar"} />
+
+          <ButtonCommon
+            isLoading={isLoading}
+            type={"submit"}
+            funcao={login}
+            content={"Continuar"}
+          />
         </form>
         <LineDivider />
         <Button

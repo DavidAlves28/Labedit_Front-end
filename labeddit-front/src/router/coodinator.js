@@ -1,6 +1,6 @@
 // buttons para navegação de Pages
 export const goToLogin=  (navigate) => { 
-    navigate('/loginPage')
+    navigate('/')
 }
 export const goToSignup =  (navigate) => { 
     navigate('/signupPage')

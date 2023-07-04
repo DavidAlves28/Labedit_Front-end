@@ -1,33 +1,56 @@
-import { Checkbox, Flex, Input, Stack, Text } from "@chakra-ui/react";
+import {
+  Alert,
+  AlertIcon,
+  Checkbox,
+  Flex,
+  FormControl,
+  Input,
+  Stack,
+  Text,
+} from "@chakra-ui/react";
 import useForm from "../../hooks/useForm";
 import { useNavigate } from "react-router-dom";
-import { goToContent } from "../../router/coodinator";
+
 import ButtonCommon from "../utils/ButtonCommon";
-import { useEffect, useState } from "react";
+import { useContext } from "react";
 import { singup } from "../../apis/signup";
+import { GlobalContext } from "../../globalContext/globalContext";
 
 export default function FormSignup() {
   const navigate = useNavigate();
+
+  const context = useContext(GlobalContext);
+  const {
+    isEmailError,
+    isError,
+    checkbox,
+    setCheckbox,
+    setIsLoading,
+    setIsError,
+    setIsEmailError,
+    isLoading,
+  } = context;
 
   const { form, onChangeForm, cleanFields } = useForm({
     name: "",
     email: "",
     password: "",
   });
-  // console.log(form);
+
   const login = (event) => {
     event.preventDefault();
+    singup(form, navigate, setIsLoading, setIsError, setIsEmailError);
+    setIsLoading(true);
     cleanFields();
-    goToContent(navigate);
-    singup(form)
   };
- 
- 
-  const [checkbox, setCheckbox] = useState(false);
+  if (form.email === "" ) {
+    setIsEmailError(false)
+  } 
+  console.log(Object.assign(form));
   return (
     <section>
       <Flex flexDir={"column"} px={{ base: "33px", md: "300px" }} mt={"70px"}>
-        <form onSubmit={login}>
+        <FormControl isRequired>
           <Input
             mb="12px"
             h="60px"
@@ -50,6 +73,14 @@ export default function FormSignup() {
             placeholder="E-mail"
             required
           />
+          {isEmailError ? (
+            <Alert rounded={"lg"} status="error">
+              <AlertIcon />
+              Email já está sendo usado
+            </Alert>
+          ) : (
+            <></>
+          )}
           <Input
             h="60px"
             id="password"
@@ -60,7 +91,14 @@ export default function FormSignup() {
             placeholder="Senha"
             required
           />
-
+          {isError  ? (
+            <Alert rounded={"lg"} status="error">
+              <AlertIcon />
+              Confira todos os campos
+            </Alert>
+          ) : (
+            <></>
+          )}
           <Stack
             mt="40px"
             spacing={0}
@@ -83,12 +121,25 @@ export default function FormSignup() {
               Eu concordo em receber emails sobre coisas legais no Labeddit
             </Checkbox>
           </Stack>
-        </form>
-
-        {checkbox ? (
-          <ButtonCommon type={"submit"} funcao={login} content={"Cadastrar"} />
+        </FormControl>
+        {isError || !checkbox ? (
+          <Alert rounded={"lg"} status="error">
+            <AlertIcon />
+            Você deve concordar para continuar
+          </Alert>
         ) : (
-          <ButtonCommon content={"Cadastrar"} />
+          <></>
+        )}
+        {checkbox ? (
+          <ButtonCommon
+            isLoading={isLoading}
+            type={"submit"}
+            funcao={login}
+            content={"Cadastrar"}
+          />
+        ) : (
+          
+          <ButtonCommon isLoading={isLoading} content={"Cadastrar"} />
         )}
       </Flex>
     </section>
