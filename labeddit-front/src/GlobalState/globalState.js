@@ -1,21 +1,19 @@
 import { useState } from "react";
 import { GlobalContext } from "../globalContext/globalContext";
 
-
 export default function GlobalState(props) {
   // coontrolar loadings nas requicões da API
   const [isLoading, setIsLoading] = useState(false);
   // controlar errors   nas requicões da API
   const [isError, setIsError] = useState(false);
 
+  const [errorStatus, setErrorStatus] = useState("");
+
   const [checkbox, setCheckbox] = useState(false);
 
   const [isEmailError, setIsEmailError] = useState("");
 
-  // useEffect(() => {
-  //     getPokemonsUrl() //  renderiza API
-  //     setIsLoading(false)
-  // }, [page])
+ 
 
   // exportação de estados e funções.
   const context = {
@@ -26,7 +24,8 @@ export default function GlobalState(props) {
     isEmailError,
     isError,
     setIsError,
-    setIsEmailError,
+    setIsEmailError, 
+    errorStatus, setErrorStatus
   };
   return (
     <GlobalContext.Provider value={context}>

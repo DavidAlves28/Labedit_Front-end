@@ -46,7 +46,7 @@ export default function FormSignup() {
   if (form.email === "" ) {
     setIsEmailError(false)
   } 
-  console.log(Object.assign(form));
+ 
   return (
     <section>
       <Flex flexDir={"column"} px={{ base: "33px", md: "300px" }} mt={"70px"}>
