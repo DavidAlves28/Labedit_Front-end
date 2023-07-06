@@ -1,6 +1,7 @@
 import {
   Alert,
   AlertIcon,
+  Box,
   Checkbox,
   Flex,
   FormControl,
@@ -10,43 +11,36 @@ import {
 } from "@chakra-ui/react";
 import useForm from "../../hooks/useForm";
 import { useNavigate } from "react-router-dom";
-
 import ButtonCommon from "../utils/ButtonCommon";
-import { useContext } from "react";
-import { singup } from "../../apis/signup";
+import { useContext, useState } from "react";
+
 import { GlobalContext } from "../../globalContext/globalContext";
+import {  useRequestLoginAPI } from "../../hooks/useRequestLoginAPI";
+import { BASE_URL } from "../../constants/BASE_URL";
 
 export default function FormSignup() {
   const navigate = useNavigate();
+  const [data, setData] = useState({});
 
   const context = useContext(GlobalContext);
-  const {
-    isEmailError,
-    isError,
-    checkbox,
-    setCheckbox,
-    setIsLoading,
-    setIsError,
-    setIsEmailError,
-    isLoading,
-  } = context;
+  const { checkbox, setCheckbox } = context;
 
   const { form, onChangeForm, cleanFields } = useForm({
     name: "",
     email: "",
     password: "",
   });
-
-  const login = (event) => {
+  const [loginAPI, errorMessage, isError, isLoading] = useRequestLoginAPI(
+    `${BASE_URL}/users/signup`,
+    {}
+  );
+  // button login da página login
+  const login = async (event) => {
     event.preventDefault();
-    singup(form, navigate, setIsLoading, setIsError, setIsEmailError);
-    setIsLoading(true);
+    setData(await loginAPI(form));
     cleanFields();
   };
-  if (form.email === "" ) {
-    setIsEmailError(false)
-  } 
- 
+
   return (
     <section>
       <Flex flexDir={"column"} px={{ base: "33px", md: "300px" }} mt={"70px"}>
@@ -73,7 +67,7 @@ export default function FormSignup() {
             placeholder="E-mail"
             required
           />
-          {isEmailError ? (
+          {errorMessage ? (
             <Alert rounded={"lg"} status="error">
               <AlertIcon />
               Email já está sendo usado
@@ -91,7 +85,7 @@ export default function FormSignup() {
             placeholder="Senha"
             required
           />
-          {isError  ? (
+          {isError ? (
             <Alert rounded={"lg"} status="error">
               <AlertIcon />
               Confira todos os campos
@@ -130,17 +124,18 @@ export default function FormSignup() {
         ) : (
           <></>
         )}
-        {checkbox ? (
-          <ButtonCommon
-            isLoading={isLoading}
-            type={"submit"}
-            funcao={login}
-            content={"Cadastrar"}
-          />
-        ) : (
-          
-          <ButtonCommon isLoading={isLoading} content={"Cadastrar"} />
-        )}
+        <Box mt="12%">
+          {checkbox ? (
+            <ButtonCommon
+              isLoading={isLoading}
+              type={"submit"}
+              funcao={login}
+              content={"Cadastrar"}
+            />
+          ) : (
+            <ButtonCommon isLoading={isLoading} content={"Cadastrar"} />
+          )}
+        </Box>
       </Flex>
     </section>
   );
