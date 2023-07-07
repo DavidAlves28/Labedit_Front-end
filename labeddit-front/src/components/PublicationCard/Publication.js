@@ -1,17 +1,25 @@
-import {  Flex, Stack, StackItem, Text } from "@chakra-ui/react";
+import { Flex, Stack, StackItem, Text } from "@chakra-ui/react";
 
-export default function PublicationCard (){
-return (
-    <Flex w='90vw' justifyContent={'center'}  alignItems={'center'} m='0 auto'>
-        <Stack bgColor={'#FBFBFB'} rounded={'12px'} >
-            <Text fontSize={'12px'}>
-            Enviado por: labaluno83 
-            </Text>
-            <Text fontSize={'18px'}>
-            Porque a maioria dos desenvolvedores usam Linux? ou as empresas de tecnologia usam Linux ?  
-            </Text>
+export default function PublicationCard({ content }) {
+  return (
+    <Flex
+      w="90vw"
+      flexDir={"column"}
+      gap={3}
+      justifyContent={"center"}
+      alignItems={"center"}
+      m="0 auto"
+    >
+      {content.map((d) => {
+        return (
+          <Stack key={d.id} bgColor={"#FBFBFB"} rounded={"12px"}>
+            <Text fontSize={"18px"}>{d.content}</Text>
+            <Text fontSize={"10px"}>{d.likes}</Text>
+            <Text fontSize={"10px"}>{d.dislikes}</Text>
             <StackItem>icones</StackItem>
-        </Stack>    
+          </Stack>
+        );
+      })}
     </Flex>
-    )
+  );
 }
