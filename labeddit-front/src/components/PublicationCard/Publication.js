@@ -1,23 +1,6 @@
-import { Flex, Skeleton, Stack, StackItem, Text } from "@chakra-ui/react";
-import { BASE_URL } from "../../constants/BASE_URL";
-import { useRequestDataPosts } from "../../hooks/useRequestDataPosts";
-import { useEffect } from "react";
+import { Flex, Stack, StackItem, Text } from "@chakra-ui/react";
 
-export default  function PublicationCard() {
-  const [data, errorMessage, isError, isLoading] =
-    useRequestDataPosts(`${BASE_URL}/posts`, {});
-  console.log(data);
-
-  if (isLoading) {
-    return (
-      <Stack>
-        <Skeleton height="20px" />
-        <Skeleton height="20px" />
-        <Skeleton height="20px" />
-      </Stack>
-    );
-  }
-
+export default function PublicationCard({ content }) {
   return (
     <Flex
       w="90vw"
@@ -27,17 +10,16 @@ export default  function PublicationCard() {
       alignItems={"center"}
       m="0 auto"
     >
-      
-        
-            <Stack  bgColor={"#FBFBFB"} rounded={"12px"}>
-              {/* <Text fontSize={"12px"}>{data}</Text>
-              <Text fontSize={"18px"}>{data.content}</Text>
-              <Text fontSize={"10px"}>{data.likes}</Text>
-              <Text fontSize={"10px"}>{data.dislikes}</Text> */}
-              <StackItem>icones</StackItem>
-            </Stack>
-        
-        
+      {content.map((d) => {
+        return (
+          <Stack key={d.id} bgColor={"#FBFBFB"} rounded={"12px"}>
+            <Text fontSize={"18px"}>{d.content}</Text>
+            <Text fontSize={"10px"}>{d.likes}</Text>
+            <Text fontSize={"10px"}>{d.dislikes}</Text>
+            <StackItem>icones</StackItem>
+          </Stack>
+        );
+      })}
     </Flex>
   );
 }

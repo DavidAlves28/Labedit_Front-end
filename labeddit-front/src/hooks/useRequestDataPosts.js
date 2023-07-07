@@ -16,42 +16,24 @@ export function useRequestDataPosts(url, initialState) {
   };
 
   const navigate = useNavigate();
+ 
+  const getAllPosts = async () => {
+    try {
+      setIsLoading(true);
+      const response = await axios.get(url, headers);
 
-  const getAllPosts = () => {
-    axios
-      .get(url, headers)
-      .then((res) => {
-        setData(res.data);
-        // redirecionar para pagina de publicações!
-        setIsLoading(false);
-        // redirecionara para pagina de publicaçoes
-        goToContent(navigate);
-      })
-      .catch((erro) => {
-        setIsError(true);
-        setIsLoading(false);
-        // Enviar mensagem com qual tido erro
-        setErrorMensage(erro.response.data);
-      });
+      setData(response.data);
+      // redirecionar para pagina de publicações!
+      setIsLoading(false);
+      // redirecionara para pagina de publicaçoes
+      goToContent(navigate);
+    } catch (error) {
+      setIsError(true);
+      setIsLoading(false);
+      // Enviar mensagem com qual tido erro
+      setErrorMensage(error.response.data);
+    }
   };
-
-  // const getAllPosts = async () => {
-  //   setIsLoading(true);
-  //   try {
-  //     const response = await axios.get(url, headers);
-
-  //     setData(response.data);
-  //     // redirecionar para pagina de publicações!
-  //     setIsLoading(false);
-  //     // redirecionara para pagina de publicaçoes
-  //     goToContent(navigate);
-  //   } catch (error) {
-  //     setIsError(true);
-  //     setIsLoading(false);
-  //     // Enviar mensagem com qual tido erro
-  //     setErrorMensage(error.response.data);
-  //   }
-  // };
   useEffect(() => {
     getAllPosts();
   }, []);

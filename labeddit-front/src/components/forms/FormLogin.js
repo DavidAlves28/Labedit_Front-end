@@ -9,6 +9,7 @@ import useForm from "../../hooks/useForm";
 import { useRequestLoginAPI } from "../../hooks/useRequestLoginAPI";
 import { BASE_URL } from "../../constants/BASE_URL";
 import { useState } from "react";
+import { ReturnErrorAPI } from "../utils/ReturnErrorAPI";
 
 export default function FormLogin() {
   // GlobalState
@@ -22,7 +23,7 @@ export default function FormLogin() {
     email: "",
     password: "",
   });
-
+  // request para login
   const [loginAPI, errorMessage, isError, isLoading] = useRequestLoginAPI(
     `${BASE_URL}/users/login`,
     {}
@@ -30,11 +31,9 @@ export default function FormLogin() {
   // button login da página login
   const login = async (event) => {
     event.preventDefault();
-    setData(await loginAPI( form));
+    setData(await loginAPI(form));
     cleanFields();
-  };
-
- 
+  }; 
 
   return (
     <section>
@@ -62,10 +61,7 @@ export default function FormLogin() {
             required
           />
             {isError ? (
-              <Alert mt="10px" rounded={"lg"} status="error">
-                <AlertIcon />
-                Confira todos os campos
-              </Alert>
+              ReturnErrorAPI(errorMessage,isError)
             ) : (
               <></>
             )}

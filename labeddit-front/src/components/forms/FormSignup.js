@@ -10,16 +10,15 @@ import {
   Text,
 } from "@chakra-ui/react";
 import useForm from "../../hooks/useForm";
-import { useNavigate } from "react-router-dom";
 import ButtonCommon from "../utils/ButtonCommon";
 import { useContext, useState } from "react";
-
 import { GlobalContext } from "../../globalContext/globalContext";
 import {  useRequestLoginAPI } from "../../hooks/useRequestLoginAPI";
 import { BASE_URL } from "../../constants/BASE_URL";
+import { ReturnErrorAPI } from "../utils/ReturnErrorAPI";
 
 export default function FormSignup() {
-  const navigate = useNavigate();
+  
   const [data, setData] = useState({});
 
   const context = useContext(GlobalContext);
@@ -34,6 +33,7 @@ export default function FormSignup() {
     `${BASE_URL}/users/signup`,
     {}
   );
+
   // button login da página login
   const login = async (event) => {
     event.preventDefault();
@@ -66,15 +66,7 @@ export default function FormSignup() {
             onChange={onChangeForm}
             placeholder="E-mail"
             required
-          />
-          {errorMessage ? (
-            <Alert rounded={"lg"} status="error">
-              <AlertIcon />
-              Email já está sendo usado
-            </Alert>
-          ) : (
-            <></>
-          )}
+          />         
           <Input
             h="60px"
             id="password"
@@ -86,10 +78,7 @@ export default function FormSignup() {
             required
           />
           {isError ? (
-            <Alert rounded={"lg"} status="error">
-              <AlertIcon />
-              Confira todos os campos
-            </Alert>
+            ReturnErrorAPI(errorMessage,isError)
           ) : (
             <></>
           )}

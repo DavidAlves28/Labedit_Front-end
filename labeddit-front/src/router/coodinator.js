@@ -6,5 +6,5 @@ export const goToSignup =  (navigate) => {
     navigate('/signupPage')
 }
 export const goToContent =  (navigate) => { 
-    navigate('/content')
+    navigate('/publications')
 }
