@@ -27,7 +27,7 @@ export default function PublicationCard({ content }) {
             border={"1px solid #E0E0E0"}
           >
             <Text  color='#6F6F6F' fontSize={"10x"}> Enviado por: {d.creator.name}</Text>
-            <Text fontWeight={"semibold"} fontSize={"18px"}>
+            <Text fontWeight={"semibold"} overflowWrap={'break-word'} fontSize={"18px"}>
               {d.content}
             </Text>
             <Flex justifyContent={'space-around'}  gap={2} alignItems={'center'} >

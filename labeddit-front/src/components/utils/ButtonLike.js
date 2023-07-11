@@ -1,15 +1,21 @@
-import { Button, Img, Link } from "@chakra-ui/react";
+import { Img, Link } from "@chakra-ui/react";
 import liked from "../../assets/images/seta-active.png";
-export default function ButtonLike({ like }) {
-  if (like) {
+
+export default function ButtonLike({ loadingData, like, dislike, id }) {
+  const doLike = () => {
+    loadingData(id, { like: true });
+   
+  };
+ 
+  if (like >= 1 && dislike === 0) {
     return (
-      <Link rounded={'2xl'}>
+      <Link onClick={doLike} rounded={"2xl"}>
         <Img w="18px" src={liked} transform={"rotate(180deg)"} />
       </Link>
     );
   } else {
     return (
-      <Link rounded={'2xl'}>
+      <Link onClick={doLike} rounded={"2xl"}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="22px"

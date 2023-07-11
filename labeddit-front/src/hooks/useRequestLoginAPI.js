@@ -3,7 +3,7 @@ import axios from "axios";
 import { goToContent } from "../router/coodinator";
 import { useNavigate } from "react-router-dom";
 
-export function useRequestLoginAPI(url, initialState) {
+export function useRequestLoginAPI(url) {
   const [isError, setIsError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMensage] = useState("");

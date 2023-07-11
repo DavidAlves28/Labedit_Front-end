@@ -3,8 +3,8 @@ import useForm from "../../hooks/useForm";
 import ButtonCommon from "../utils/ButtonCommon";
 import LineDivider from "../utils/LineDivider";
 import { BASE_URL } from "../../constants/BASE_URL";
-
 import useCreatePost from "../API/useCreatePost";
+
 
 export default function FormPublication() {
   const { form, onChangeForm, cleanFields } = useForm({
@@ -13,13 +13,15 @@ export default function FormPublication() {
   // context utilizado.
 
   // form de login
-  const [createPost] = useCreatePost(`${BASE_URL}/posts`, form, {});
+  const [createPost,isError,isLoading,errorMessage] = useCreatePost(`${BASE_URL}/posts`, form, {});
+  
 
   // button login da página login
   const publicContent = async (event) => {
     event.preventDefault();
     await createPost();
     cleanFields();
+    window.location.reload()
   };
 
   return (
@@ -38,7 +40,7 @@ export default function FormPublication() {
           placeholder="Escreva seu post..."
           mb="15px"
         />
-        <ButtonCommon funcao={publicContent} content={"Postar"} />
+        <ButtonCommon funcao={publicContent} isLoading={isLoading} content={"Postar"} />
         <LineDivider />
       </FormControl>
     </Stack>

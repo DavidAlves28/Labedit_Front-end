@@ -1,11 +1,11 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import axios from "axios";
 import { goToContent } from "../router/coodinator";
 import { useNavigate } from "react-router-dom";
 
 export function useRequestDataPosts(url, initialState) {
   const [data, setData] = useState(initialState);
-
+  
   const [isError, setIsError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMensage] = useState("");
@@ -14,15 +14,17 @@ export function useRequestDataPosts(url, initialState) {
       Authorization: localStorage.getItem("token"),
     },
   };
+  
 
   const navigate = useNavigate();
- 
+  // console.log(data);
   const getAllPosts = async () => {
     try {
       setIsLoading(true);
       const response = await axios.get(url, headers);
 
       setData(response.data);
+      console.log(response.data);
       // redirecionar para pagina de publicações!
       setIsLoading(false);
       // redirecionara para pagina de publicaçoes
@@ -36,7 +38,7 @@ export function useRequestDataPosts(url, initialState) {
   };
   useEffect(() => {
     getAllPosts();
-  }, [data]);
+  }, []);
 
-  return [ data, errorMessage, isError, isLoading];
+  return [data, errorMessage, isError, isLoading];
 }

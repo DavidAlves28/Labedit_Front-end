@@ -1,11 +1,11 @@
 import axios from "axios";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function useCreatePost(url, body) {
   const [data, setData] = useState({});
   const [isError, setIsError] = useState(false);
-
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMensage] = useState("");
   const headers = {
@@ -16,7 +16,7 @@ export default function useCreatePost(url, body) {
 
   const createPost = async () => {
     try {
-      //   setIsLoading(true);
+      setIsLoading(true);
       const response = await axios.post(url, body, headers);
       setData(response.data);
       // redirecionar para pagina de publicações!
@@ -30,6 +30,6 @@ export default function useCreatePost(url, body) {
       setErrorMensage(error.response.data);
     }
   };
-  
-  return [createPost,isError,isLoading,errorMessage];
+
+  return [createPost, isError, isLoading, errorMessage];
 }
