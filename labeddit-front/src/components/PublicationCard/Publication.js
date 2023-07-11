@@ -1,5 +1,6 @@
-import { Flex, Stack, StackItem, Text } from "@chakra-ui/react";
+import { Flex, Text } from "@chakra-ui/react";
 
+import IsLikedPost from "../utils/isLikedPost";
 export default function PublicationCard({ content }) {
   return (
     <Flex
@@ -12,12 +13,24 @@ export default function PublicationCard({ content }) {
     >
       {content.map((d) => {
         return (
-          <Stack key={d.id} bgColor={"#FBFBFB"} rounded={"12px"}>
-            <Text fontSize={"18px"}>{d.content}</Text>
-            <Text fontSize={"10px"}>{d.likes}</Text>
-            <Text fontSize={"10px"}>{d.dislikes}</Text>
-            <StackItem>icones</StackItem>
-          </Stack>
+          <Flex
+            flexDir={"column"}
+            justifyContent={"space-between"}
+            alignItems={"self-start"}
+            key={d.id}
+            bgColor={"#FBFBFB"}
+            rounded={"12px"}
+            p="9px 10px"
+            w="full"
+            h="167px"
+            border={'1px solid #E0E0E0'}
+          >
+            <Text fontSize={"10x"}> Enviado por: {d.creator.name}</Text>
+            <Text fontWeight={"semibold"} fontSize={"18px"}>
+              {d.content}
+            </Text>
+            <IsLikedPost counter={d.counter}  postId={d.id} like={d.likes} dislike={d.dislikes} />
+          </Flex>
         );
       })}
     </Flex>
