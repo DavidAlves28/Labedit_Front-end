@@ -1,10 +1,8 @@
-import { Alert, AlertIcon, Box, Button, Flex, Input } from "@chakra-ui/react";
+import { Box, Button, Flex, Input } from "@chakra-ui/react";
 import { goToSignup } from "../../router/coodinator";
 import ButtonCommon from "../utils/ButtonCommon";
 import LineDivider from "../utils/LineDivider";
-
 import { useNavigate } from "react-router-dom";
-
 import useForm from "../../hooks/useForm";
 import { useRequestLoginAPI } from "../../hooks/useRequestLoginAPI";
 import { BASE_URL } from "../../constants/BASE_URL";
@@ -33,7 +31,7 @@ export default function FormLogin() {
     event.preventDefault();
     setData(await loginAPI(form));
     cleanFields();
-  }; 
+  };
 
   return (
     <section>
@@ -60,14 +58,8 @@ export default function FormLogin() {
             placeholder="Senha"
             required
           />
-            {isError ? (
-              ReturnErrorAPI(errorMessage,isError)
-            ) : (
-              <></>
-            )}
-          <Box mt='12%' >
-          
-
+          {isError ? ReturnErrorAPI(errorMessage, isError) : <></>}
+          <Box mt="12%">
             <ButtonCommon
               isLoading={isLoading}
               type={"submit"}

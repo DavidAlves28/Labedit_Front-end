@@ -1,9 +1,9 @@
-import { Button, Img, Link } from "@chakra-ui/react";
+import {  Img, Link } from "@chakra-ui/react";
 import liked from "../../assets/images/seta-red.png";
 export default function ButtonDislike({ dislike }) {
-  if (!dislike) {
+  if (dislike) {
     return (
-      <Link >
+      <Link  >
         <Img src={liked}   w='18px' />
       </Link>
     );

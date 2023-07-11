@@ -2,9 +2,9 @@ import { FormControl, Stack, Textarea } from "@chakra-ui/react";
 import useForm from "../../hooks/useForm";
 import ButtonCommon from "../utils/ButtonCommon";
 import LineDivider from "../utils/LineDivider";
-import { useEffect, useState } from "react";
 import { BASE_URL } from "../../constants/BASE_URL";
-import { useRequestDataPosts } from "../../hooks/useRequestDataPosts";
+
+import useCreatePost from "../API/useCreatePost";
 
 export default function FormPublication() {
   const { form, onChangeForm, cleanFields } = useForm({
@@ -13,13 +13,12 @@ export default function FormPublication() {
   // context utilizado.
 
   // form de login
+  const [createPost] = useCreatePost(`${BASE_URL}/posts`, form, {});
 
-  const [getAllPosts, data, errorMessage, isError, isLoading] =
-    useRequestDataPosts(`${BASE_URL}/posts`, {});
   // button login da página login
   const publicContent = async (event) => {
     event.preventDefault();
-    await getAllPosts(form);
+    await createPost();
     cleanFields();
   };
 
