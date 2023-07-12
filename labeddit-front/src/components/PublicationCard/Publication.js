@@ -1,11 +1,14 @@
-import { Box, Flex, Text } from "@chakra-ui/react";
-
+import { Button, Flex, Text } from "@chakra-ui/react";
 import IsLikedPost from "../utils/isLikedPost";
+import { goToCommentToPost } from "../../router/coodinator";
+import { useNavigate } from "react-router-dom";
 import ModalComments from "../ModalComments/ModalComments";
 export default function PublicationCard({ content }) {
+  const navigate = useNavigate();
+
   return (
     <Flex
-      w="90vw"
+      w={{ base: "90vw", md: "1200px" }}
       flexDir={"column"}
       gap={3}
       justifyContent={"center"}
@@ -22,22 +25,31 @@ export default function PublicationCard({ content }) {
             bgColor={"#FBFBFB"}
             rounded={"12px"}
             p="9px 10px"
-            w="full"
+            w={{ base: "full", md: "30%" }}
             h="167px"
             border={"1px solid #E0E0E0"}
           >
-            <Text  color='#6F6F6F' fontSize={"10x"}> Enviado por: {d.creator.name}</Text>
-            <Text fontWeight={"semibold"} overflowWrap={'break-word'} fontSize={"18px"}>
+            <Text color="#6F6F6F" fontSize={"10x"}>
+              {" "}
+              Enviado por: {d.creator.name}
+            </Text>
+            <Text
+              fontWeight={"semibold"}
+              overflowWrap={"break-word"}
+              fontSize={"18px"}
+            >
               {d.content}
             </Text>
-            <Flex justifyContent={'space-around'}  gap={2} alignItems={'center'} >
+            <Flex justifyContent={"space-around"} gap={2} alignItems={"center"}>
               <IsLikedPost
                 counter={d.counter}
                 postId={d.id}
                 like={d.likes}
                 dislike={d.dislikes}
               />
-              <ModalComments  />
+              <Button
+                onClick={() => goToCommentToPost(navigate, d.id)}
+              ><ModalComments/></Button>
             </Flex>
           </Flex>
         );

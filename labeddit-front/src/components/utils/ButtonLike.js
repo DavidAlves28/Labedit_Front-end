@@ -1,12 +1,20 @@
 import { Img, Link } from "@chakra-ui/react";
 import liked from "../../assets/images/seta-active.png";
+import { useContext, useEffect } from "react";
+import { GlobalContext } from "../../globalContext/globalContext";
 
 export default function ButtonLike({ loadingData, like, dislike, id }) {
+  const context = useContext(GlobalContext);
+
+  const { getAllPosts } = context;
+  console.log(like);
   const doLike = () => {
+    
     loadingData(id, { like: true });
-   
+    
   };
- 
+  
+
   if (like >= 1 && dislike === 0) {
     return (
       <Link onClick={doLike} rounded={"2xl"}>

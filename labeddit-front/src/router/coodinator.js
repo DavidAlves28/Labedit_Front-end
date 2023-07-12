@@ -8,3 +8,6 @@ export const goToSignup =  (navigate) => {
 export const goToContent =  (navigate) => { 
     navigate('/publications')
 }
+export const goToCommentToPost =  (navigate,id) => { 
+    navigate(`/publications/${id}`)
+}

@@ -1,6 +1,7 @@
 import { Img, Link } from "@chakra-ui/react";
 import liked from "../../assets/images/seta-red.png";
 export default function ButtonDislike({counter, loadingData, id, like, dislike }) {
+  
   const doDislike = () => {
     loadingData(id, { like: false });
   };
@@ -24,7 +25,7 @@ export default function ButtonDislike({counter, loadingData, id, like, dislike }
     </Link>
     );
   }
-  if (dislike === 1 || like === 0) {
+  if (dislike === 1 && like === 0 ) {
     return (
       <Link onClick={doDislike}>
         <Img src={liked} w="18px" />

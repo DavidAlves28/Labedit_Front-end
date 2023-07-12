@@ -3,17 +3,18 @@ import axios from "axios";
 import { BASE_URL } from "../../constants/BASE_URL";
 import ButtonLike from "./ButtonLike";
 import ButtonDislike from "./ButtonDislike";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { goToContent } from "../../router/coodinator";
 import { useNavigate } from "react-router-dom";
 import { useLikePosts } from "../../hooks/useLikePosts";
+import { GlobalContext } from "../../globalContext/globalContext";
 
 export default function IsLikedPost(props) {
-  // console.log(props);
+
  
   const { postId, like, dislike, counter } = props;
   const [loadingData, loading, error, setError, errorMessage] = useLikePosts();
-  // console.log(postId);
+
   return (
     <Flex
       direction={"row"}

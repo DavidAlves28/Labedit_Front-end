@@ -3,15 +3,20 @@ import Header from "../components/Headers/header";
 import FormPublication from "../components/forms/FormPublication";
 import useProtectedPage from "../hooks/useProtectedPage";
 import PublicationCard from "../components/PublicationCard/Publication";
-import { useRequestDataPosts } from "../hooks/useRequestDataPosts";
-import { BASE_URL } from "../constants/BASE_URL";
+
+import { useContext, useEffect } from "react";
+import { GlobalContext } from "../globalContext/globalContext";
 
 export default function PublicationsPage() {
   useProtectedPage();
-
-  const [data, isLoading] = useRequestDataPosts(`${BASE_URL}/posts`, []);
-
-// Faz com que a publicação mostrar seja a primeira a ser rederizada!
+  const context = useContext(GlobalContext);
+  // import dos dados da GlobalState
+  const { getAllPosts, isLoading, data } = context;
+  // const [data,isLoading] = useRequestDataPosts(`${BASE_URL}/posts`, {});
+  useEffect(() => {
+    getAllPosts();
+  }, []);
+  // Faz com que a publicação mostrar seja a primeira a ser rederizada!
   const dataReverse = (array) => {
     let arrayInvertido = [];
     for (let i = array.length - 1; i >= 0; i--) {
@@ -22,7 +27,7 @@ export default function PublicationsPage() {
   dataReverse(data);
   if (isLoading) {
     return (
-      <Stack maxW={"1280px"} m="0 auto">
+      <Stack w={{base:'90vw',md:"400px"}} m="0 auto">
         <Header />
         <FormPublication />
         <Stack>
