@@ -2,16 +2,14 @@ import { FormControl, Stack,Textarea } from "@chakra-ui/react";
 import useForm from "../../hooks/useForm";
 import ButtonCommon from "../utils/ButtonCommon";
 import LineDivider from "../utils/LineDivider";
-import { BASE_URL } from "../../constants/BASE_URL";
-import useCreatePost from "../../hooks/useCreatePost";
 import { useContext,  } from "react";
 import { GlobalContext } from "../../globalContext/globalContext";
 import { ReturnErrorAPI } from "../utils/ReturnErrorAPI";
 
-export default function FormPublication() {
+export default function FormComments({postId}) {
   const context = useContext(GlobalContext);
 
-  const { getAllPosts } = context;
+  const { createComment } = context;
   
   const { form, onChangeForm, cleanFields } = useForm({
     content: "",
@@ -19,18 +17,14 @@ export default function FormPublication() {
   // context utilizado.
 
   // form de login
-  const [createPost, isError, isLoading, errorMessage] = useCreatePost(
-    `${BASE_URL}/posts`,
-    form,
-    {}
-  );
+ 
 
   // button login da página login
   const publicContent = async (event) => {
     event.preventDefault();
-    await createPost();
+    await createComment(postId,form);
     cleanFields();
-    getAllPosts();
+    // getAllPosts();
   };
   
   return (
@@ -49,11 +43,11 @@ export default function FormPublication() {
           placeholder="Escreva seu post..."
           mb="15px"
         />
-        {isError ? ReturnErrorAPI(errorMessage, isError) : <></>}
+        {/* {isError ? ReturnErrorAPI(errorMessage, isError) : <></>} */}
         <ButtonCommon
         
           funcao={publicContent}
-          isLoading={isLoading}
+        //   isLoading={isLoading}
           content={"Postar"}
         />
         <LineDivider />

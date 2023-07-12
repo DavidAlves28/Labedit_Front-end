@@ -1,6 +1,9 @@
 import { Box, Stack } from "@chakra-ui/react";
 import iconComments from "../../assets/images/comments.svg";
+import { useParams } from "react-router-dom";
 export default function ModalComments() {
+
+
   return (
     <Stack
       justify={"center"}
@@ -27,3 +30,5 @@ export default function ModalComments() {
     </Stack>
   );
 }
+
+

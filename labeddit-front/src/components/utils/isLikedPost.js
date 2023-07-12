@@ -3,40 +3,17 @@ import axios from "axios";
 import { BASE_URL } from "../../constants/BASE_URL";
 import ButtonLike from "./ButtonLike";
 import ButtonDislike from "./ButtonDislike";
-
+import { useContext, useEffect, useState } from "react";
+import { goToContent } from "../../router/coodinator";
+import { useNavigate } from "react-router-dom";
+import { useLikePosts } from "../../hooks/useLikePosts";
+import { GlobalContext } from "../../globalContext/globalContext";
 
 export default function IsLikedPost(props) {
+
+ 
   const { postId, like, dislike, counter } = props;
-
-  // const [likes,setLikes] = useState(liked)
-  const headers = {
-    headers: {
-      Authorization: localStorage.getItem("token"),
-    },
-  };
-
-
-  const body = {
-    like: true,
-  };
-  const isLiked = async () => {
-    try {
-      // setIsLoading(true);
-      const response = await axios.put(
-        `${BASE_URL}/posts/${postId}/like`,
-        body,
-        headers
-      );
-      console.log(response);
-      
-    } catch (error) {
-      // setIsError(true);
-      // setIsLoading(false);
-      // Enviar mensagem com qual tido erro
-      // setErrorMensage(error.response.data);
-      console.log(error.response.data);
-    }
-  };
+  const [loadingData, loading, error, setError, errorMessage] = useLikePosts();
 
   return (
     <Flex
@@ -48,13 +25,20 @@ export default function IsLikedPost(props) {
       w="100px"
       h="30px"
     >
-      <ButtonLike click={isLiked} like={like} />
-      <Text color='#6F6F6F' >{counter}</Text>
-      <ButtonDislike click={isLiked} dislike={dislike} />
-
+      <ButtonLike
+        loadingData={loadingData}
+        like={like}
+        dislike={dislike}
+        id={postId}
+      />
+      <Text color="#6F6F6F">{counter}</Text>
+      <ButtonDislike
+        loadingData={loadingData}
+        dislike={dislike}
+        like={like}
+        id={postId}
+        counter={counter}
+      />
     </Flex>
   );
 }
-
-
-
