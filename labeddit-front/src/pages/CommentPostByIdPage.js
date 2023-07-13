@@ -8,33 +8,38 @@ import { GlobalContext } from "../globalContext/globalContext";
 import FormComments from "../components/forms/FormComments";
 import PublicationCard from "../components/PublicationCard/Publication";
 import PostOrigin from "../components/PostOrigin/postOrigin";
+import CommentsCard from "../components/CommentsCard/CommentsCard";
 
-export default function CommentPostByIdPage ({content}){
+export default function CommentPostByIdPage (){
     
     useProtectedPage();
     const {id} = useParams()
     const context = useContext(GlobalContext);
     // import dos dados da GlobalState
-    const { getComments,dataGetC,dataComment } = context;
+    const {dataComment ,filterPost,getComments,post,dataGetC} = context;
 
-    console.log(id);
-   
+    
 
     useEffect(()=>{
-    getComments(id)
-    },[])
+    //   getAllPosts()
+    getComments(id)    
+  },[])
+  
+  // filterPost(id)
+  
+ console.log(post, 'commn');
     
 return (
     <Stack maxW={"1280px"} m="0 auto">
     
     <Header />
-    {/* <PostOrigin postId={id} />  */}
-    <PublicationCard content={dataGetC} />
+    <PostOrigin post={post} /> 
     
     {/* formulário para publicar */}
     <FormComments postId={id}/>
 
-    <PublicationCard content ={dataComment} />
+    <CommentsCard content={dataGetC}/>
+    
   </Stack>
     
     )

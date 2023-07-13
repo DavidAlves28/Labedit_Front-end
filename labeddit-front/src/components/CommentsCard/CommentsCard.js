@@ -2,9 +2,10 @@ import { Box, Flex, Text } from "@chakra-ui/react";
 
 import IsLikedPost from "../utils/isLikedPost";
 export default function CommentsCard({ content }) {
+  console.log(content);
   return (
     <Flex
-      w="90vw"
+      w={{ base: "90vw", md: "1200px" }}
       flexDir={"column"}
       gap={3}
       justifyContent={"center"}
@@ -21,19 +22,29 @@ export default function CommentsCard({ content }) {
             bgColor={"#FBFBFB"}
             rounded={"12px"}
             p="9px 10px"
-            w="full"
+            w={{ base: "full", md: "30%" }}
             h="167px"
-            border={'1px solid #E0E0E0'}
+            border={"1px solid #E0E0E0"}
           >
-            <Text fontSize={"10x"}> Enviado por: {d.creator.name}</Text>
-            <Text fontWeight={"semibold"} fontSize={"18px"}>
+            <Text color="#6F6F6F" fontSize={"10x"}>
+              {" "}
+              Enviado por: {d.creator_name}
+            </Text>
+            <Text
+              fontWeight={"semibold"}
+              overflowWrap={"break-word"}
+              fontSize={"18px"}
+            >
               {d.content}
             </Text>
-            <Box>
-            <IsLikedPost counter={d.counter}  postId={d.id} like={d.likes} dislike={d.dislikes} />
-            
-            </Box>
-
+            <Flex justifyContent={"space-around"} gap={2} alignItems={"center"}>
+              <IsLikedPost
+                counter={d.counter}
+                commentId={d.id}
+                like={d.likes}
+                dislike={d.dislikes}
+              />
+            </Flex>
           </Flex>
         );
       })}

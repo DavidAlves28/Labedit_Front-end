@@ -8,12 +8,13 @@ import { goToContent } from "../../router/coodinator";
 import { useNavigate } from "react-router-dom";
 import { useLikePosts } from "../../hooks/useLikePosts";
 import { GlobalContext } from "../../globalContext/globalContext";
+import { useLikeDislikeComment } from "../../hooks/useLikeDislikeComment";
 
-export default function IsLikedPost(props) {
+export default function IsLikedPost({ postId, like, dislike, counter, commentId }) {
+  
 
- 
-  const { postId, like, dislike, counter } = props;
   const [loadingData, loading, error, setError, errorMessage] = useLikePosts();
+  const [updateLike] = useLikeDislikeComment();
 
   return (
     <Flex
@@ -27,13 +28,17 @@ export default function IsLikedPost(props) {
     >
       <ButtonLike
         loadingData={loadingData}
+        updateLike={updateLike}
         like={like}
         dislike={dislike}
         id={postId}
+        commentId={commentId}
       />
       <Text color="#6F6F6F">{counter}</Text>
       <ButtonDislike
         loadingData={loadingData}
+        updateLike={updateLike}
+        commentId={commentId}
         dislike={dislike}
         like={like}
         id={postId}
