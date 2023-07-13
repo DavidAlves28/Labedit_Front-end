@@ -1,7 +1,7 @@
 import { Button, Flex, Text } from "@chakra-ui/react";
 import IsLikedPost from "../utils/isLikedPost";
 import { goToCommentToPost } from "../../router/coodinator";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import ModalComments from "../ModalComments/ModalComments";
 export default function PublicationCard({ content }) {
   const navigate = useNavigate();
@@ -47,9 +47,9 @@ export default function PublicationCard({ content }) {
                 like={d.likes}
                 dislike={d.dislikes}
               />
-              <Button
-                onClick={() => goToCommentToPost(navigate, d.id)}
-              ><ModalComments/></Button>
+              <Link  to={`/publications/${d.id}`} >
+                <ModalComments />
+              </Link>
             </Flex>
           </Flex>
         );

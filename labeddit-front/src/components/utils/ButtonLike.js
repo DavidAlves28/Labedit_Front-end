@@ -3,17 +3,24 @@ import liked from "../../assets/images/seta-active.png";
 import { useContext, useEffect } from "react";
 import { GlobalContext } from "../../globalContext/globalContext";
 
-export default function ButtonLike({ loadingData, like, dislike, id }) {
+export default function ButtonLike({
+  updateLike,
+  loadingData,
+  like,
+  dislike,
+  id,
+  commentId,
+}) {
   const context = useContext(GlobalContext);
-
   const { getAllPosts } = context;
-  console.log(like);
+
   const doLike = () => {
-    
-    loadingData(id, { like: true });
-    
+    if (commentId) {
+      updateLike(commentId, { like: true });
+    } else {
+      loadingData(id, { like: true });
+    }
   };
-  
 
   if (like >= 1 && dislike === 0) {
     return (
