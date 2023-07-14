@@ -1,9 +1,7 @@
 import React from "react";
 import FormSignup from "../components/forms/FormSignup";
-
 import { Stack, Text } from "@chakra-ui/react";
 import Header from "../components/Headers/header";
-
 
 export default function SignupPage() {
   

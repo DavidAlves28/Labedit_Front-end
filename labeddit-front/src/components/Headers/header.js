@@ -1,15 +1,17 @@
-import { Box, Button, Img, Stack } from "@chakra-ui/react";
+import { Box, Img, Stack, Text } from "@chakra-ui/react";
 import logolabe from "../../assets/images/logolabeddit.svg";
-import { Link, useNavigate } from "react-router-dom";
-import { goToLogin } from "../../router/coodinator";
+import { Link,useParams } from "react-router-dom";
+
+import { TfiClose } from "react-icons/tfi";
 export default function Header() {
-  const navigate = useNavigate();
+  
+  const { id } = useParams();
+  const location = window.location.pathname === `/publications/${id}`;
 
   const isToken = localStorage.getItem("token");
 
   const logout = () => {
     localStorage.removeItem("token");
-    goToLogin(navigate);
   };
   return (
     <Box w={{ base: "100vw", md: "720px" }} m="0 auto">
@@ -17,22 +19,25 @@ export default function Header() {
         <Stack
           w={"100%"}
           h="50px"
-          justify={"center"}
+          justify={"space-around"}
           direction={"row"}
           align={"center"}
         >
+          {/* Button para fechar pagina de comentario */}
+          <Link to="/publications">{location && <TfiClose />}</Link>
+
           <Img w="28px" src={logolabe} />
+
           <Stack
-            pos="absolute"
             right={{ base: "10%", md: "35%" }}
             align={"end"}
             fontSize={"18px"}
             color={"#4088CB"}
           >
             {isToken ? (
-              <Button onClick={() => logout()} color={"#4088CB"}>
-                Logout
-              </Button>
+              <Link onClick={() => logout()} to="/" color={"#4088CB"}>
+                <Text fontWeight={"semibold"}>Logout</Text>
+              </Link>
             ) : (
               <Link to="/">Entrar</Link>
             )}

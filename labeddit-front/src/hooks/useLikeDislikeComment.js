@@ -12,7 +12,7 @@ export const useLikeDislikeComment = () => {
       Authorization: localStorage.getItem("token"),
     },
   };
-  const updateLike = async (id, body) => {
+  const updateLikeComments = async (id, body) => {
     setLoading(true);
 
     try {
@@ -39,5 +39,5 @@ export const useLikeDislikeComment = () => {
 
 
 
-  return [updateLike, loading, error, setError, errorMessage];
+  return [updateLikeComments, loading, error, setError, errorMessage];
 };

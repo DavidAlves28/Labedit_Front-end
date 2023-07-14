@@ -1,32 +1,27 @@
-import { FormControl, Stack,Textarea } from "@chakra-ui/react";
+import { FormControl, Stack, Textarea } from "@chakra-ui/react";
 import useForm from "../../hooks/useForm";
 import ButtonCommon from "../utils/ButtonCommon";
 import LineDivider from "../utils/LineDivider";
-import { useContext,  } from "react";
+import { useContext} from "react";
 import { GlobalContext } from "../../globalContext/globalContext";
-import { ReturnErrorAPI } from "../utils/ReturnErrorAPI";
 
-export default function FormComments({postId}) {
+export default function FormComments({ postId }) {
   const context = useContext(GlobalContext);
 
-  const { createComment } = context;
-  
+  const { createComment, isLoading,} = context;
+
   const { form, onChangeForm, cleanFields } = useForm({
     content: "",
   });
-  // context utilizado.
 
-  // form de login
- 
-
-  // button login da página login
+  // funcão para publicar comentário do post
   const publicContent = async (event) => {
     event.preventDefault();
-    await createComment(postId,form);
+    await createComment(postId, form);
     cleanFields();
-    // getAllPosts();
+    
   };
-  
+
   return (
     <Stack py="30px" maxW="600px" m="0 auto">
       <FormControl>
@@ -43,12 +38,12 @@ export default function FormComments({postId}) {
           placeholder="Escreva seu post..."
           mb="15px"
         />
-        {/* {isError ? ReturnErrorAPI(errorMessage, isError) : <></>} */}
+        {/*  button reutilizável */}
         <ButtonCommon
-        
           funcao={publicContent}
-        //   isLoading={isLoading}
-          content={"Postar"}
+          isLoading={isLoading}
+          content={"Responder"}
+          type={"submit"}
         />
         <LineDivider />
       </FormControl>

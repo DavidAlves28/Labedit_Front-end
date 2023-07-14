@@ -1,12 +1,14 @@
 import {  Flex, Text } from "@chakra-ui/react";
 import IsLikedPost from "../utils/isLikedPost";
+
 import { Link} from "react-router-dom";
 import ModalComments from "../ModalComments/ModalComments";
+import { postsMock } from "../../mocks/posts";
 
 
-export default function PublicationCard({ content }) { 
+export default function PublicationMock() { 
 
-
+ 
 
   return (
     <Flex
@@ -17,7 +19,7 @@ export default function PublicationCard({ content }) {
       alignItems={"center"}
       m="0 auto"
     >
-      {content.map((d) => {
+      {postsMock.map((d) => {
         return (
           <Flex
             flexDir={"column"}
@@ -42,19 +44,7 @@ export default function PublicationCard({ content }) {
             >
               {d.content}
             </Text>
-            <Flex justifyContent={"space-around"} gap={2} alignItems={"center"}>
-              <IsLikedPost
-                counter={d.counter}
-                postId={d.id}
-                like={d.likes}
-                dislike={d.dislikes}
-                
-              />
-              {/*  comentários */}
-              <Link  to={`/publications/${d.id}`} >
-                <ModalComments    />
-              </Link>
-            </Flex>
+           
           </Flex>
         );
       })}

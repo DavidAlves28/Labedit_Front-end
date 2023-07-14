@@ -1,13 +1,9 @@
 import {  Flex, Text } from "@chakra-ui/react";
-import IsLikedPost from "../utils/isLikedPost";
-import { Link} from "react-router-dom";
-import ModalComments from "../ModalComments/ModalComments";
 
 
-export default function PublicationCard({ content }) { 
+import { commentsMock } from "../../mocks/comments";
 
-
-
+export default function CommentsMock() {
   return (
     <Flex
       w={{ base: "90vw", md: "1200px" }}
@@ -17,10 +13,10 @@ export default function PublicationCard({ content }) {
       alignItems={"center"}
       m="0 auto"
     >
-      {content.map((d) => {
+      {commentsMock.map((d) => {
         return (
           <Flex
-            flexDir={"column"}
+           flexDir={"column"}
             justifyContent={"space-between"}
             alignItems={"self-start"}
             key={d.id}
@@ -33,7 +29,7 @@ export default function PublicationCard({ content }) {
           >
             <Text color="#6F6F6F" fontSize={"10x"}>
               {" "}
-              Enviado por: {d.creator.name}
+              Enviado por: {d.creator_name}
             </Text>
             <Text
               fontWeight={"semibold"}
@@ -42,19 +38,7 @@ export default function PublicationCard({ content }) {
             >
               {d.content}
             </Text>
-            <Flex justifyContent={"space-around"} gap={2} alignItems={"center"}>
-              <IsLikedPost
-                counter={d.counter}
-                postId={d.id}
-                like={d.likes}
-                dislike={d.dislikes}
-                
-              />
-              {/*  comentários */}
-              <Link  to={`/publications/${d.id}`} >
-                <ModalComments    />
-              </Link>
-            </Flex>
+            
           </Flex>
         );
       })}

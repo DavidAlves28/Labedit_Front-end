@@ -1,8 +1,16 @@
 import { Box, Flex, Text } from "@chakra-ui/react";
 
 import IsLikedPost from "../utils/isLikedPost";
-export default function CommentsCard({ content }) {
-  console.log(content);
+import { useContext, useEffect } from "react";
+import { GlobalContext } from "../../globalContext/globalContext";
+
+export default function CommentsCard({ postId,content }) {
+  const context = useContext(GlobalContext);
+  // import dos dados da GlobalState
+  const {  getComments, dataGetC } = context;
+  useEffect(()=>{
+    getComments(postId)
+  },[])
   return (
     <Flex
       w={{ base: "90vw", md: "1200px" }}
@@ -15,7 +23,7 @@ export default function CommentsCard({ content }) {
       {content.map((d) => {
         return (
           <Flex
-            flexDir={"column"}
+           flexDir={"column"}
             justifyContent={"space-between"}
             alignItems={"self-start"}
             key={d.id}
@@ -42,6 +50,7 @@ export default function CommentsCard({ content }) {
                 counter={d.counter}
                 commentId={d.id}
                 like={d.likes}
+                postId={postId}
                 dislike={d.dislikes}
               />
             </Flex>

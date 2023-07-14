@@ -1,19 +1,28 @@
 import { Img, Link } from "@chakra-ui/react";
 import liked from "../../assets/images/seta-red.png";
+import { useContext } from "react";
+import { GlobalContext } from "../../globalContext/globalContext";
+
 export default function ButtonDislike({
   counter,
-  loadingData,
-  id,
+  updateLikePosts,
+  postId,
   like,
   dislike,
   commentId,
-  updateLike,
+  updateLikeComments,
 }) {
+  const context = useContext(GlobalContext);
+  const { getAllPosts, getComments } = context;
+
   const doDislike = () => {
     if (commentId) {
-      updateLike(commentId, { like: false });
-    } else {
-      loadingData(id, { like: false });
+      updateLikeComments(commentId, { like: false });
+      getComments(postId);
+    }
+    if (postId) {
+      updateLikePosts(postId, { like: false });
+      getAllPosts();
     }
   };
 
