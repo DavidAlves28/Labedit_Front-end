@@ -20,7 +20,8 @@ export default function CommentsCard({ postId,content }) {
       alignItems={"center"}
       m="0 auto"
     >
-      {content.map((d) => {
+      {content.filter((f)=>{ return f.id_post === postId})
+      .map((d) => {
         return (
           <Flex
            flexDir={"column"}

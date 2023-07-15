@@ -1,10 +1,11 @@
 import {  Flex, Stack, Text } from "@chakra-ui/react";
-
 import { useContext } from "react";
 import { GlobalContext } from "../../globalContext/globalContext";
-export default function ModalComments() {
+export default function ModalComments({id}) {
   const context = useContext(GlobalContext);
   const { dataGetC} = context;   
+  // retorna numero de comentários cada post tem/
+  const commentsCC = dataGetC.filter((f)=>{ return id === f.id_post})
   return (
     <Flex
       justifyContent={"space-around"}
@@ -30,7 +31,8 @@ export default function ModalComments() {
           />
         </svg>
       </Stack>
-        {/* <Text>{dataGetC.length}</Text> */}
+        {<Text>{commentsCC.length}</Text> }
+        
     </Flex>
   );
 }

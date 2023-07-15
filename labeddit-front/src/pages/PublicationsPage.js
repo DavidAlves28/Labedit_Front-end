@@ -3,10 +3,10 @@ import Header from "../components/Headers/header";
 import FormPublication from "../components/forms/FormPublication";
 import useProtectedPage from "../hooks/useProtectedPage";
 import PublicationCard from "../components/PublicationCard/Publication";
-
 import { useContext, useEffect} from "react";
 import { GlobalContext } from "../globalContext/globalContext";
 import PublicationMock from "../components/PublicationCard/publicationMock";
+import { returnArrayReverse } from "../components/utils/returnArrayReverse";
 
 export default function PublicationsPage() {
   useProtectedPage();
@@ -18,16 +18,6 @@ export default function PublicationsPage() {
     getAllPosts();
   }, []);
 
-  // Faz com que a publicação mostrar seja a primeira a ser rederizada!
-  const dataReverse = (array) => {
-    let arrayInvertido = [];
-    for (let i = array.length - 1; i >= 0; i--) {
-      arrayInvertido.push(array[i]);
-    }
-    return arrayInvertido;
-  };
-
-  dataReverse(data);
 
   if (isLoading) {
     return (
@@ -44,7 +34,7 @@ export default function PublicationsPage() {
   }
 
   return (
-    <Stack maxW={"1280px"} m="0 auto">
+    <Stack maxW={"1280px"} m="0 auto" mb='30px'>
       <Header />
       {/* formulário para publicar */}
       <FormPublication />
@@ -52,7 +42,7 @@ export default function PublicationsPage() {
       {data.length === "" ? (
         <PublicationMock />
       ) : (
-        <PublicationCard content={dataReverse(data)} />
+        <PublicationCard content={returnArrayReverse(data)} />
       )}
     </Stack>
   );

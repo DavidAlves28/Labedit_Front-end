@@ -8,7 +8,7 @@ import { GlobalContext } from "../../globalContext/globalContext";
 export default function FormComments({ postId }) {
   const context = useContext(GlobalContext);
 
-  const { createComment, isLoading,} = context;
+  const { createComment, isLoading,getComments} = context;
 
   const { form, onChangeForm, cleanFields } = useForm({
     content: "",
@@ -19,11 +19,13 @@ export default function FormComments({ postId }) {
     event.preventDefault();
     await createComment(postId, form);
     cleanFields();
+    getComments(postId );   
     
   };
 
   return (
-    <Stack py="30px" maxW="600px" m="0 auto">
+    <Stack 
+     py="30px" maxW="600px" m="0 auto">
       <FormControl>
         <Textarea
           isRequired
@@ -33,10 +35,11 @@ export default function FormComments({ postId }) {
           value={form.content}
           onChange={onChangeForm}
           bgColor={"#EDEDED"}
-          minW="364px"
+          minW="364px"          
           minH="131px"
           placeholder="Escreva seu post..."
           mb="15px"
+         
         />
         {/*  button reutilizável */}
         <ButtonCommon

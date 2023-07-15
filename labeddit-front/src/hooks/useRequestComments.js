@@ -16,8 +16,7 @@ export function useRequestComments(url, initialState) {
     try {
       setIsLoading(true);
       const response = await axios.get(url, headers);
-      setDataComments(response.dataComments);
-      console.log(dataComments);
+      setDataComments(response.dataComments);     
       // redirecionar para pagina de publicações!
       setIsLoading(false);
       // redirecionara para pagina de publicaçoes

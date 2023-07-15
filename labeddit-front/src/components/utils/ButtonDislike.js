@@ -2,6 +2,7 @@ import { Img, Link } from "@chakra-ui/react";
 import liked from "../../assets/images/seta-red.png";
 import { useContext } from "react";
 import { GlobalContext } from "../../globalContext/globalContext";
+import { useParams } from "react-router-dom";
 
 export default function ButtonDislike({
   counter,
@@ -12,18 +13,18 @@ export default function ButtonDislike({
   commentId,
   updateLikeComments,
 }) {
+  const {id} = useParams()
   const context = useContext(GlobalContext);
-  const { getAllPosts, getComments } = context;
-
+  const {  getPostById,getComments } = context;
+ 
   const doDislike = () => {
     if (commentId) {
       updateLikeComments(commentId, { like: false });
       getComments(postId);
-    }
-    if (postId) {
+    }else {
       updateLikePosts(postId, { like: false });
-      getAllPosts();
     }
+    getPostById(id);
   };
 
   if (counter === 0) {

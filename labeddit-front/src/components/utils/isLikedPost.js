@@ -24,6 +24,7 @@ export default function IsLikedPost({
       w="100px"
       h="30px"
     >
+     {/*  button de like e dislike em posts e comments */}
       <ButtonLike
         updateLikePosts={updateLikePosts}
         updateLikeComments={updateLikeComments}
@@ -33,6 +34,8 @@ export default function IsLikedPost({
         commentId={commentId}
       />
       <Text color="#6F6F6F">{counter}</Text>
+     {/*  button de dislike e dislike em posts e comments */}
+
       <ButtonDislike
         updateLikePosts={updateLikePosts}
         updateLikeComments={updateLikeComments}

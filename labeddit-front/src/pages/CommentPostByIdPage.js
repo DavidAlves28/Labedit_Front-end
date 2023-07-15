@@ -7,6 +7,7 @@ import { GlobalContext } from "../globalContext/globalContext";
 import FormComments from "../components/forms/FormComments";
 import PostOrigin from "../components/PostOrigin/postOrigin";
 import CommentsCard from "../components/CommentsCard/CommentsCard";
+import { returnArrayReverse } from "../components/utils/returnArrayReverse";
 
 export default function CommentPostByIdPage() {
   useProtectedPage();
@@ -14,10 +15,11 @@ export default function CommentPostByIdPage() {
   const context = useContext(GlobalContext);
   // import dos dados da GlobalState
   const { getAllPosts,isLoading, getComments, dataGetC } = context;
+ 
 
   useEffect(() => {
-    getAllPosts()   
     getComments(id);   
+    getAllPosts()   
   },[]);
   if (isLoading) {
     return (
@@ -36,7 +38,7 @@ export default function CommentPostByIdPage() {
  
  
   return (
-    <Stack maxW={"1280px"} m="0 auto">
+    <Stack maxW={"1280px"} m="0 auto" mb='30px'>
       <Header />
       <PostOrigin postId={id} />
 
@@ -49,7 +51,7 @@ export default function CommentPostByIdPage() {
           </Text>
         </Stack>
       ) : (
-        <CommentsCard postId={id} content={dataGetC} />
+        <CommentsCard postId={id} content={returnArrayReverse(dataGetC)} />
       )}
     </Stack>
   );

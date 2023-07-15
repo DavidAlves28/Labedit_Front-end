@@ -1,13 +1,9 @@
-import {  Flex, Text } from "@chakra-ui/react";
+import { Flex, Text } from "@chakra-ui/react";
 import IsLikedPost from "../utils/isLikedPost";
-import { Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import ModalComments from "../ModalComments/ModalComments";
-
-
-export default function PublicationCard({ content }) { 
-
-
-
+export default function PublicationCard({ content }) {
+ 
   return (
     <Flex
       w={{ base: "90vw", md: "1200px" }}
@@ -18,6 +14,7 @@ export default function PublicationCard({ content }) {
       m="0 auto"
     >
       {content.map((d) => {
+      
         return (
           <Flex
             flexDir={"column"}
@@ -31,8 +28,7 @@ export default function PublicationCard({ content }) {
             h="167px"
             border={"1px solid #E0E0E0"}
           >
-            <Text color="#6F6F6F" fontSize={"10x"}>
-              {" "}
+            <Text color="#6F6F6F" fontSize={"10x"}>             
               Enviado por: {d.creator.name}
             </Text>
             <Text
@@ -48,11 +44,10 @@ export default function PublicationCard({ content }) {
                 postId={d.id}
                 like={d.likes}
                 dislike={d.dislikes}
-                
               />
               {/*  comentários */}
-              <Link  to={`/publications/${d.id}`} >
-                <ModalComments    />
+              <Link to={`/publications/${d.id}`}>
+                <ModalComments id={d.id} />
               </Link>
             </Flex>
           </Flex>

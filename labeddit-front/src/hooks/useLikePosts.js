@@ -14,19 +14,16 @@ export const useLikePosts = () => {
   };
   const updateLikePosts = async (id, body) => {
     setLoading(true);
-
     try {
       const response = await axios.put(
         `${BASE_URL}/posts/${id}/like`,
         body,
         headers
       );
-
       setLoading(false);
       
       return response.data;
-    } catch (erro) {
-      console.log(erro.message);
+    } catch (erro) { 
 
       setLoading(false);
       setError(true);

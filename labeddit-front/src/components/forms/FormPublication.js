@@ -11,14 +11,14 @@ import { ReturnErrorAPI } from "../utils/ReturnErrorAPI";
 export default function FormPublication() {
   const context = useContext(GlobalContext);
 
-  const { getAllPosts } = context;
+  const { getAllPosts,} = context;
   
   const { form, onChangeForm, cleanFields } = useForm({
     content: "",
   });
   // context utilizado.
 
-  // form de login
+  // request para criar post
   const [createPost, isError, isLoading, errorMessage] = useCreatePost(
     `${BASE_URL}/posts`,
     form,
@@ -29,12 +29,12 @@ export default function FormPublication() {
   const publicContent = async (event) => {
     event.preventDefault();
     await createPost();
-    cleanFields();
     getAllPosts();
+    cleanFields();
   };
   
   return (
-    <Stack py="30px" maxW="600px" m="0 auto">
+    <Stack  minW="364px"  py="30px" maxW="600px" m="0 auto">
       <FormControl>
         <Textarea
           isRequired
