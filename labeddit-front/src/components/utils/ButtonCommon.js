@@ -1,7 +1,10 @@
 import { Button, Stack } from "@chakra-ui/react";
 import Loading from "./Loading";
 
+
 export default function ButtonCommon({ isLoading, content, funcao, type }) {
+
+ 
   return (
     <Stack justify={"center"} align={"center"}>
       {isLoading ? (

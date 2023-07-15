@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import {  useState } from "react";
 import { BASE_URL } from "../constants/BASE_URL";
 
 export const useLikePosts = () => {
@@ -12,21 +12,18 @@ export const useLikePosts = () => {
       Authorization: localStorage.getItem("token"),
     },
   };
-  const loadingData = async (id, body) => {
+  const updateLikePosts = async (id, body) => {
     setLoading(true);
-
     try {
       const response = await axios.put(
         `${BASE_URL}/posts/${id}/like`,
         body,
         headers
       );
-
       setLoading(false);
       
       return response.data;
-    } catch (erro) {
-      console.log(erro.message);
+    } catch (erro) { 
 
       setLoading(false);
       setError(true);
@@ -39,5 +36,5 @@ export const useLikePosts = () => {
 
 
 
-  return [loadingData, loading, error, setError, errorMessage];
+  return [updateLikePosts, loading, error, setError, errorMessage];
 };

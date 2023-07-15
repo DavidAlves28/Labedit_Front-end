@@ -1,46 +1,58 @@
 import { useParams } from "react-router-dom";
 import useProtectedPage from "../hooks/useProtectedPage";
-import { Button, Stack } from "@chakra-ui/react";
+import { Skeleton, Stack, Text } from "@chakra-ui/react";
 import Header from "../components/Headers/header";
-
 import { useContext, useEffect } from "react";
 import { GlobalContext } from "../globalContext/globalContext";
 import FormComments from "../components/forms/FormComments";
-import PublicationCard from "../components/PublicationCard/Publication";
 import PostOrigin from "../components/PostOrigin/postOrigin";
 import CommentsCard from "../components/CommentsCard/CommentsCard";
+import { returnArrayReverse } from "../components/utils/returnArrayReverse";
 
-export default function CommentPostByIdPage (){
-    
-    useProtectedPage();
-    const {id} = useParams()
-    const context = useContext(GlobalContext);
-    // import dos dados da GlobalState
-    const {dataComment ,filterPost,getComments,post,dataGetC} = context;
+export default function CommentPostByIdPage() {
+  useProtectedPage();
+  const { id } = useParams();
+  const context = useContext(GlobalContext);
+  // import dos dados da GlobalState
+  const { getAllPosts,isLoading, getComments, dataGetC } = context;
+ 
 
-    
+  useEffect(() => {
+    getComments(id);   
+    getAllPosts()   
+  },[]);
+  if (isLoading) {
+    return (
+      <Stack w={{ base: "90vw", md: "400px" }} m="0 auto">
 
-    useEffect(()=>{
-    //   getAllPosts()
-    getComments(id)    
-  },[])
-  
-  // filterPost(id)
-  
- console.log(post, 'commn');
-    
-return (
-    <Stack maxW={"1280px"} m="0 auto">
-    
-    <Header />
-    <PostOrigin post={post} /> 
-    
-    {/* formulário para publicar */}
-    <FormComments postId={id}/>
+        <Header />
+          <Skeleton height="20px" />
+        <FormComments postId={id} />
+        <Stack>
+          <Skeleton height="20px" />
+          <Skeleton height="20px" />
+        </Stack>
+      </Stack>
+    );
+  }
+ 
+ 
+  return (
+    <Stack maxW={"1280px"} m="0 auto" mb='30px'>
+      <Header />
+      <PostOrigin postId={id} />
 
-    <CommentsCard content={dataGetC}/>
-    
-  </Stack>
-    
-    )
+      {/* formulário para publicar */}
+      <FormComments postId={id} />
+      {dataGetC.length === 0 ? (
+        <Stack w={{ base: "90vw", md: "1200px" }} m="0 auto">
+          <Text align={"center"} fontWeight={"semibold"}>
+            Sem comentários por enquanto para está postagem.
+          </Text>
+        </Stack>
+      ) : (
+        <CommentsCard postId={id} content={returnArrayReverse(dataGetC)} />
+      )}
+    </Stack>
+  );
 }

@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import {  useState } from "react";
 import { BASE_URL } from "../constants/BASE_URL";
 
 export const useLikeDislikeComment = () => {
@@ -12,7 +12,7 @@ export const useLikeDislikeComment = () => {
       Authorization: localStorage.getItem("token"),
     },
   };
-  const updateLike = async (id, body) => {
+  const updateLikeComments = async (id, body) => {
     setLoading(true);
 
     try {
@@ -21,12 +21,9 @@ export const useLikeDislikeComment = () => {
         body,
         headers
       );
-
-      setLoading(false);
-      
+      setLoading(false);      
       return response.data;
-    } catch (erro) {
-      console.log(erro.message);
+    } catch (erro) {     
 
       setLoading(false);
       setError(true);
@@ -39,5 +36,5 @@ export const useLikeDislikeComment = () => {
 
 
 
-  return [updateLike, loading, error, setError, errorMessage];
+  return [updateLikeComments, loading, error, setError, errorMessage];
 };

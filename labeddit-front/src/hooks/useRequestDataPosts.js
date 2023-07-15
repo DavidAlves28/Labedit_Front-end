@@ -16,8 +16,8 @@ export function useRequestDataPosts(url, initialState) {
     try {
       setIsLoading(true);
       const response = await axios.get(url, headers);
-      setData(response.data);
-      console.log(data);
+      setData(response.data)
+     
       // redirecionar para pagina de publicações!
       setIsLoading(false);
       // redirecionara para pagina de publicaçoes

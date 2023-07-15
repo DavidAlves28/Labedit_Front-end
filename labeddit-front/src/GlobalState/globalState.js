@@ -1,62 +1,70 @@
 import { useState } from "react";
 import { GlobalContext } from "../globalContext/globalContext";
 import { BASE_URL } from "../constants/BASE_URL";
-
 import { useRequestDataPosts } from "../hooks/useRequestDataPosts";
 import axios from "axios";
 
 export default function GlobalState(props) {
+
+  // verificar se token esta alocado no localstorage
   const headers = {
     headers: {
       Authorization: localStorage.getItem("token"),
     },
   };
+  // checkbox para input signup
   const [checkbox, setCheckbox] = useState(false);
 
+  // retornar todos os posts
   const [getAllPosts, data, errorMessage, isError, isLoading] =
     useRequestDataPosts(`${BASE_URL}/posts`, {});
-  // retornar todos os comentários do post 
+
+  // retornar todos os comentários do post
   const [dataGetC, setDataGetC] = useState([]);
   const getComments = async (postId) => {
     try {
-      const response = await axios.get(`${BASE_URL}/posts/${postId}`,headers);
+      const response = await axios.get(
+        `${BASE_URL}/posts/${postId}/comments`,
+        headers
+      );
       setDataGetC(response.data);
       // setIsLoading(false)
     } catch (error) {
       // setIsLoading(true)
     }
   };
-  // criar comentário 
+  // criar comentário
   const [dataComment, setDataComment] = useState([]);
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(null);
   const createComment = async (id, body) => {
     try {
-      // setIsLoading(true);
+      setLoading(true);
       const response = await axios.post(
         `${BASE_URL}/posts/${id}/comments`,
         body,
         headers
       );
       setDataComment(response.data);
-      // redirecionar para pagina de publicações!
-      // setIsLoading(false);
-      // redirecionara para pagina de publicaçoes
+      setLoading(false);
     } catch (error) {
-      // setIsError(true);
-      // setIsLoading(false);
-      // // Enviar mensagem com qual tido erro
-      // setErrorMensage(error.response.data[0].message);
-      console.log(error);
+      setError(true);
+      setLoading(false);
     }
   };
+
+  // retornar uma postagem
   const [post, setPost] = useState([]);
-  const filterPost = (id) => {
- 
-      const posts = data && data.map((p) => p.id === id)
-      setPost(posts)
-    
+  const getPostById = async (id) => {
+    try {      
+      const response = await axios.get(`${BASE_URL}/posts/${id}`, headers);
+      setPost(response.data);
+    } catch (error) {
+      console.log(error);
+      // // Enviar mensagem com qual tido erro
+    }
   };
 
-  
   // exportação de estados e funções.
   const context = {
     getAllPosts,
@@ -70,8 +78,9 @@ export default function GlobalState(props) {
     createComment,
     dataComment,
     dataGetC,
-    filterPost,
+    getPostById,
     post,
+    
   };
   return (
     <GlobalContext.Provider value={context}>

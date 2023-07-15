@@ -1,16 +1,15 @@
-import { Box, Flex, Text } from "@chakra-ui/react";
-
+import {  Flex, Text } from "@chakra-ui/react";
 import IsLikedPost from "../utils/isLikedPost";
-import { useContext, useEffect } from "react";
-import { GlobalContext } from "../../globalContext/globalContext";
 
-export default function CommentsCard({ postId,content }) {
-  const context = useContext(GlobalContext);
-  // import dos dados da GlobalState
-  const {  getComments, dataGetC } = context;
-  useEffect(()=>{
-    getComments(postId)
-  },[])
+import { Link} from "react-router-dom";
+import ModalComments from "../ModalComments/ModalComments";
+import { postsMock } from "../../mocks/posts";
+
+
+export default function PublicationMock() { 
+
+ 
+
   return (
     <Flex
       w={{ base: "90vw", md: "1200px" }}
@@ -20,11 +19,10 @@ export default function CommentsCard({ postId,content }) {
       alignItems={"center"}
       m="0 auto"
     >
-      {content.filter((f)=>{ return f.id_post === postId})
-      .map((d) => {
+      {postsMock.map((d) => {
         return (
           <Flex
-           flexDir={"column"}
+            flexDir={"column"}
             justifyContent={"space-between"}
             alignItems={"self-start"}
             key={d.id}
@@ -37,7 +35,7 @@ export default function CommentsCard({ postId,content }) {
           >
             <Text color="#6F6F6F" fontSize={"10x"}>
               {" "}
-              Enviado por: {d.creator_name}
+              Enviado por: {d.creator.name}
             </Text>
             <Text
               fontWeight={"semibold"}
@@ -46,15 +44,7 @@ export default function CommentsCard({ postId,content }) {
             >
               {d.content}
             </Text>
-            <Flex justifyContent={"space-around"} gap={2} alignItems={"center"}>
-              <IsLikedPost
-                counter={d.counter}
-                commentId={d.id}
-                like={d.likes}
-                postId={postId}
-                dislike={d.dislikes}
-              />
-            </Flex>
+           
           </Flex>
         );
       })}
