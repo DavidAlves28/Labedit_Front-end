@@ -13,7 +13,7 @@ export default function IsLikedPost({
 }) {
   const [updateLikePosts] = useLikePosts();
   const [updateLikeComments] = useLikeDislikeComment();
-
+  console.log(postId);
   return (
     <Flex
       direction={"row"}

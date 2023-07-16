@@ -56,7 +56,7 @@ export default function PostOrigin ({postId}){
                 dislike={d.dislikes}
               />
 
-              <Link  to={`/publications/${d.id}`} >
+              <Link  to={`/feed/${d.id}`} >
                 <ModalComments />
               </Link>
             </Flex>

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
-import { goToContent } from "../router/coodinator";
+import {  goToFeed } from "../router/coodinator";
 import { useNavigate } from "react-router-dom";
 
 export function useRequestLoginAPI(url) {
@@ -20,7 +20,7 @@ export function useRequestLoginAPI(url) {
       // redirecionar para pagina de publicações!
       setIsLoading(false);
       // redirecionara para pagina de publicaçoes
-      goToContent(navigate);
+      goToFeed(navigate);
     } catch (error) {
       setIsError(true);
       setIsLoading(false);

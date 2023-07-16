@@ -1,18 +1,18 @@
-import { FormControl, Stack,Textarea } from "@chakra-ui/react";
+import { FormControl, Stack, Textarea } from "@chakra-ui/react";
 import useForm from "../../hooks/useForm";
 import ButtonCommon from "../utils/ButtonCommon";
 import LineDivider from "../utils/LineDivider";
 import { BASE_URL } from "../../constants/BASE_URL";
 import useCreatePost from "../../hooks/useCreatePost";
-import { useContext,  } from "react";
+import { useContext } from "react";
 import { GlobalContext } from "../../globalContext/globalContext";
 import { ReturnErrorAPI } from "../utils/ReturnErrorAPI";
 
 export default function FormPublication() {
   const context = useContext(GlobalContext);
 
-  const { getAllPosts,} = context;
-  
+  const { getAllPosts } = context;
+
   const { form, onChangeForm, cleanFields } = useForm({
     content: "",
   });
@@ -32,9 +32,9 @@ export default function FormPublication() {
     getAllPosts();
     cleanFields();
   };
-  
+
   return (
-    <Stack  minW="364px"  py="30px" maxW="600px" m="0 auto">
+    <Stack minW="364px" py="30px" maxW="600px" m="0 auto">
       <FormControl>
         <Textarea
           isRequired
@@ -51,7 +51,6 @@ export default function FormPublication() {
         />
         {isError ? ReturnErrorAPI(errorMessage, isError) : <></>}
         <ButtonCommon
-        
           funcao={publicContent}
           isLoading={isLoading}
           content={"Postar"}
