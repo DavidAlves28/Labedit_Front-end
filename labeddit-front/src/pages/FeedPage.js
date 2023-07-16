@@ -11,10 +11,8 @@ export default function FeedPage() {
   useProtectedPage();
   const context = useContext(GlobalContext);
   // import dos dados da GlobalState
-  const { getAllPosts, isLoading, data, isCounter ,setIsCounter } = context;
- useEffect(() => {
-    getAllPosts();
-  }, []);
+  const { getAllPosts, isLoading, data} = context;
+
 
 
   if (isLoading) {
