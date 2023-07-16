@@ -14,19 +14,21 @@ export default function CommentPostByIdPage() {
   const { id } = useParams();
   const context = useContext(GlobalContext);
   // import dos dados da GlobalState
-  const { getAllPosts,isLoading, getComments, dataGetC } = context;
- 
-
+  const { getPostById, isLoading, getComments, dataGetC } = context;
+  // console.log(dataGetC);
+  const returnCommentsNumber = dataGetC.filter((f) => {
+    return id === f.id_post;
+  });
   useEffect(() => {
-    getComments(id);   
-    getAllPosts()   
-  },[]);
+    getPostById(id);
+    getComments(id);
+  }, []);
+
   if (isLoading) {
     return (
       <Stack w={{ base: "90vw", md: "400px" }} m="0 auto">
-
         <Header />
-          <Skeleton height="20px" />
+        <Skeleton height="20px" />
         <FormComments postId={id} />
         <Stack>
           <Skeleton height="20px" />
@@ -35,16 +37,16 @@ export default function CommentPostByIdPage() {
       </Stack>
     );
   }
- 
- 
+
   return (
-    <Stack maxW={"1280px"} m="0 auto" mb='30px'>
+    <Stack maxW={"1280px"} m="0 auto" mb="30px">
       <Header />
+
       <PostOrigin postId={id} />
 
       {/* formulário para publicar */}
       <FormComments postId={id} />
-      {dataGetC.length === 0 ? (
+      {returnCommentsNumber.length === 0 ? (
         <Stack w={{ base: "90vw", md: "1200px" }} m="0 auto">
           <Text align={"center"} fontWeight={"semibold"}>
             Sem comentários por enquanto para está postagem.

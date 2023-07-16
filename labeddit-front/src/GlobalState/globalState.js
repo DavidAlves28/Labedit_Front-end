@@ -33,6 +33,7 @@ export default function GlobalState(props) {
       // setIsLoading(true)
     }
   };
+  
   // criar comentário
   const [dataComment, setDataComment] = useState([]);
   const [error, setError] = useState(null);
@@ -60,8 +61,8 @@ export default function GlobalState(props) {
       const response = await axios.get(`${BASE_URL}/posts/${id}`, headers);
       setPost(response.data);
     } catch (error) {
-      console.log(error);
-      // // Enviar mensagem com qual tido erro
+      setError(error);
+     
     }
   };
 

@@ -6,7 +6,7 @@ import { TfiClose } from "react-icons/tfi";
 export default function Header() {
   
   const { id } = useParams();
-  const location = window.location.pathname === `/publications/${id}`;
+  const location = window.location.pathname === `/feed/${id}`;
 
   const isToken = localStorage.getItem("token");
 
@@ -24,7 +24,7 @@ export default function Header() {
           align={"center"}
         >
           {/* Button para fechar pagina de comentario */}
-          <Link to="/publications">{location && <TfiClose />}</Link>
+          <Link to="/feed">{location && <TfiClose />}</Link>
 
           <Img w="28px" src={logolabe} />
 
@@ -39,7 +39,7 @@ export default function Header() {
                 <Text fontWeight={"semibold"}>Logout</Text>
               </Link>
             ) : (
-              <Link to="/">Entrar</Link>
+              <Link to="/"><Text fontWeight={"semibold"}>Entrar</Text></Link>
             )}
           </Stack>
         </Stack>

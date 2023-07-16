@@ -39,6 +39,7 @@ export default function PublicationCard({ content }) {
               {d.content}
             </Text>
             <Flex justifyContent={"space-around"} gap={2} alignItems={"center"}>
+              {/* Buttons para like e dislike */}
               <IsLikedPost
                 counter={d.counter}
                 postId={d.id}
@@ -46,7 +47,7 @@ export default function PublicationCard({ content }) {
                 dislike={d.dislikes}
               />
               {/*  comentários */}
-              <Link to={`/publications/${d.id}`}>
+              <Link to={`/feed/${d.id}`}>
                 <ModalComments id={d.id} />
               </Link>
             </Flex>

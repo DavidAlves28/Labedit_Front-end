@@ -1,5 +1,4 @@
-import { Box, Flex, Text } from "@chakra-ui/react";
-
+import { Flex, Text } from "@chakra-ui/react";
 import IsLikedPost from "../utils/isLikedPost";
 import { useContext, useEffect } from "react";
 import { GlobalContext } from "../../globalContext/globalContext";
@@ -7,7 +6,7 @@ import { GlobalContext } from "../../globalContext/globalContext";
 export default function CommentsCard({ postId,content }) {
   const context = useContext(GlobalContext);
   // import dos dados da GlobalState
-  const {  getComments, dataGetC } = context;
+  const {  getComments, } = context;
   useEffect(()=>{
     getComments(postId)
   },[])
@@ -19,6 +18,7 @@ export default function CommentsCard({ postId,content }) {
       justifyContent={"center"}
       alignItems={"center"}
       m="0 auto"
+      
     >
       {content.filter((f)=>{ return f.id_post === postId})
       .map((d) => {
@@ -32,7 +32,7 @@ export default function CommentsCard({ postId,content }) {
             rounded={"12px"}
             p="9px 10px"
             w={{ base: "full", md: "30%" }}
-            h="167px"
+            minH="167px"
             border={"1px solid #E0E0E0"}
           >
             <Text color="#6F6F6F" fontSize={"10x"}>

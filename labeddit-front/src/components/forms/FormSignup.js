@@ -5,6 +5,7 @@ import {
   Checkbox,
   Flex,
   FormControl,
+  Highlight,
   Input,
   Stack,
   Text,
@@ -13,12 +14,12 @@ import useForm from "../../hooks/useForm";
 import ButtonCommon from "../utils/ButtonCommon";
 import { useContext, useState } from "react";
 import { GlobalContext } from "../../globalContext/globalContext";
-import {  useRequestLoginAPI } from "../../hooks/useRequestLoginAPI";
+import { useRequestLoginAPI } from "../../hooks/useRequestLoginAPI";
 import { BASE_URL } from "../../constants/BASE_URL";
 import { ReturnErrorAPI } from "../utils/ReturnErrorAPI";
+import { Link } from "react-router-dom";
 
 export default function FormSignup() {
-  
   const [data, setData] = useState({});
 
   const context = useContext(GlobalContext);
@@ -66,7 +67,7 @@ export default function FormSignup() {
             onChange={onChangeForm}
             placeholder="E-mail"
             required
-          />         
+          />
           <Input
             h="60px"
             id="password"
@@ -77,11 +78,7 @@ export default function FormSignup() {
             placeholder="Senha"
             required
           />
-          {isError ? (
-            ReturnErrorAPI(errorMessage,isError)
-          ) : (
-            <></>
-          )}
+          {isError ? ReturnErrorAPI(errorMessage, isError) : <></>}
           <Stack
             mt="40px"
             spacing={0}
@@ -91,10 +88,17 @@ export default function FormSignup() {
             fontSize={"14px"}
             gap={"12px"}
           >
-            <Text>
-              Ao continuar, você concorda com o nosso Contrato de usuário e
-              nossa Política de Privacidade
-            </Text>
+            <Box>
+              <Text>
+                <Highlight
+                  query={["Contrato de usuário", "Política de Privacidade"]}
+                  styles={{ py: "1", fontWeight: "normal", color: "#4088CB" }}
+                >
+                  Ao continuar, você concorda com o nosso, Contrato de usuário e
+                  nossa Política de Privacidade
+                </Highlight>
+              </Text>
+            </Box>
             <Checkbox
               fontWeight={"semibold"}
               isRequired

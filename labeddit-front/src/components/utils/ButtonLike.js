@@ -12,7 +12,7 @@ export default function ButtonLike({
   commentId,
 }) {
   const context = useContext(GlobalContext);
-  const { getComments, getPostById } = context;
+  const { getComments,  getAllPosts,getPostById } = context;
 
   const doLike = () => {
     if (commentId) {
@@ -21,6 +21,7 @@ export default function ButtonLike({
     } else {
       updateLikePosts(postId, { like: true });
       getPostById(postId);
+      getAllPosts()
     }
     
   };

@@ -5,9 +5,9 @@ export const goToLogin=  (navigate) => {
 export const goToSignup =  (navigate) => { 
     navigate('/signupPage')
 }
-export const goToContent =  (navigate) => { 
-    navigate('/publications')
+export const goToFeed =  (navigate) => { 
+    navigate('/feed')
 }
 export const goToCommentToPost =  (navigate,id) => { 
-    navigate(`/publications/${id}`)
+    navigate(`/feed/${id}`)
 }
