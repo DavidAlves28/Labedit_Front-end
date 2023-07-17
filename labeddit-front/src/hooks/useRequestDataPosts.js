@@ -11,11 +11,14 @@ export function useRequestDataPosts(url, initialState) {
       Authorization: localStorage.getItem("token"),
     },
   };
+  const token = localStorage.getItem('token')
   
   const getAllPosts = async () => {
     try {
       setIsLoading(true);
       const response = await axios.get(url, headers);
+
+
       setData(response.data)  
       
       
@@ -30,5 +33,5 @@ export function useRequestDataPosts(url, initialState) {
     }
   };
  
-  return [getAllPosts, data, errorMessage, isError, isLoading];
+  return [getAllPosts, data, errorMessage, isError, isLoading,token];
 }
