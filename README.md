@@ -6,7 +6,7 @@
  ## Design do projeto
  O projeto teve como principal objetivo ser Mobile-first, seguindo o design do figma https://www.figma.com/file/Byakv89sjTqI6NG2NRAAKJ/Projeto-Integrador-Labeddit?type=design&node-id=0-1&mode=design&t=B3WKLEa9qAOAZm7h-0 . 
 
-
+Deploy :  https://labedit-front-end.vercel.app/
 ## Tecnologias utilizadas Front
 - React.js;
 - React-router-dom;
