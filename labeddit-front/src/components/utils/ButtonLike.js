@@ -26,7 +26,7 @@ export default function ButtonLike({
     
   };
  
-  if (like >= 1 && dislike === 0) {
+  if (like  >= 0 && dislike === 0) {
     return (
       <Link onClick={doLike} rounded={"2xl"}>
         <Img w="18px" src={liked} transform={"rotate(180deg)"} />

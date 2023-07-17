@@ -29,8 +29,6 @@ export function useRequestDataPosts(url, initialState) {
       setErrorMensage(error.response.data);
     }
   };
-  useEffect(() => {
-    getAllPosts();
-  }, []);
+ 
   return [getAllPosts, data, errorMessage, isError, isLoading];
 }
