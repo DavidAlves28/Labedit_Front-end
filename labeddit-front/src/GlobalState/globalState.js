@@ -12,6 +12,7 @@ export default function GlobalState(props) {
       Authorization: localStorage.getItem("token"),
     },
   };
+  const token = localStorage.getItem("token")
   // checkbox para input signup
   const [checkbox, setCheckbox] = useState(false);
 
@@ -81,6 +82,7 @@ export default function GlobalState(props) {
     dataGetC,
     getPostById,
     post,
+    token
     
   };
   return (

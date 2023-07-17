@@ -11,7 +11,7 @@ import { ReturnErrorAPI } from "../utils/ReturnErrorAPI";
 export default function FormPublication() {
   const context = useContext(GlobalContext);
 
-  const { getAllPosts } = context;
+  const { getAllPosts,token } = context;
 
   const { form, onChangeForm, cleanFields } = useForm({
     content: "",
@@ -29,7 +29,7 @@ export default function FormPublication() {
   const publicContent = async (event) => {
     event.preventDefault();
     await createPost();
-    getAllPosts();
+    token &&  getAllPosts();
     cleanFields();
   };
 
