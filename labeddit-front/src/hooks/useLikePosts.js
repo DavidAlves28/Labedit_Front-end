@@ -1,5 +1,5 @@
 import axios from "axios";
-import {  useState } from "react";
+import {  useEffect, useState } from "react";
 import { BASE_URL } from "../constants/BASE_URL";
 
 export const useLikePosts = () => {

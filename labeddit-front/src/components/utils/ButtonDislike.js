@@ -17,6 +17,8 @@ export default function ButtonDislike({
   const context = useContext(GlobalContext);
   const { getAllPosts, getPostById, getComments } = context;
 
+  
+
   const doDislike = () => {
     if (commentId) {
       updateLikeComments(commentId, { like: false });

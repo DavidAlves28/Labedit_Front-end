@@ -17,7 +17,7 @@ import { GlobalContext } from "../../globalContext/globalContext";
 import { useRequestLoginAPI } from "../../hooks/useRequestLoginAPI";
 import { BASE_URL } from "../../constants/BASE_URL";
 import { ReturnErrorAPI } from "../utils/ReturnErrorAPI";
-import { Link } from "react-router-dom";
+
 
 export default function FormSignup() {
   const [data, setData] = useState({});

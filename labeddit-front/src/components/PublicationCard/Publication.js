@@ -2,6 +2,7 @@ import { Flex, Text } from "@chakra-ui/react";
 import IsLikedPost from "../utils/isLikedPost";
 import { Link } from "react-router-dom";
 import ModalComments from "../ModalComments/ModalComments";
+import { useEffect } from "react";
 export default function PublicationCard({ content }) {
  
   return (
@@ -14,7 +15,7 @@ export default function PublicationCard({ content }) {
       m="0 auto"
     >
       {content.map((d) => {
-      
+       
         return (
           <Flex
             flexDir={"column"}
@@ -57,3 +58,4 @@ export default function PublicationCard({ content }) {
     </Flex>
   );
 }
+

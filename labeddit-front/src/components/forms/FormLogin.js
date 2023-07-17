@@ -22,14 +22,14 @@ export default function FormLogin() {
     password: "",
   });
   // request para login
-  const [loginAPI, errorMessage, isError, isLoading] = useRequestLoginAPI(
+  const [loginAPI,errorMessage, isError, isLoading] = useRequestLoginAPI(
     `${BASE_URL}/users/login`,
     {}
   );
   // button login da página login
   const login = async (event) => {
     event.preventDefault();
-    setData(await loginAPI(form));
+    await loginAPI(form)
     cleanFields();
   };
 

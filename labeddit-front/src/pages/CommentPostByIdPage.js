@@ -46,6 +46,7 @@ export default function CommentPostByIdPage() {
 
       {/* formulário para publicar */}
       <FormComments postId={id} />
+     
       {returnCommentsNumber.length === 0 ? (
         <Stack w={{ base: "90vw", md: "1200px" }} m="0 auto">
           <Text align={"center"} fontWeight={"semibold"}>

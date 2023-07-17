@@ -10,6 +10,7 @@ export default function CommentsCard({ postId,content }) {
   useEffect(()=>{
     getComments(postId)
   },[])
+  
   return (
     <Flex
       w={{ base: "90vw", md: "1200px" }}
