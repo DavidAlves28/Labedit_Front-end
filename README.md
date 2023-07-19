@@ -30,3 +30,9 @@ Deploy :  https://labedit-front-end.vercel.app/
 
  Repo :  https://github.com/DavidAlves28/Labedit_back-end
 
+ ## Desafios a serem feitos 
+ - Impementar update de posts;
+ - Impementar delete de post;
+ - Impementar update de comments;
+ - Impementar delete de comments;
+ - Impementar  renderização de likes isolados, sem que a página de reload.
