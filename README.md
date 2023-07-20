@@ -1,6 +1,9 @@
 # Labeddit
 
  Um projeto full-stack, a aplicacação consiste em uma rede social, com 4 páginas, login, signup, feed, comments. O usuário pederá se cadastrar entrar no feed escrever publicações, dar like ou dislikes nos posts, comentar seu e outros posts. 
+![labedditMobile](https://github.com/DavidAlves28/Labedit_Front-end/assets/107942209/94ef0ce8-e01c-4da6-be65-da1a077dda4e)
+
+![labediit](https://github.com/DavidAlves28/Labedit_Front-end/assets/107942209/518d3a47-96d2-4942-818e-c4b06e15d5c7)
 
 Deploy :  https://labedit-front-end.vercel.app/
  
